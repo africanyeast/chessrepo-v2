@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+from decouple import config
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,11 +23,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-n&+e7g&3z(yb_4*-1@+jw5nq%_*^ca4l)g9jg-(nttcuu^$=x^"
 
+ENV = config('ENV', default='local')
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if ENV == 'production':
+    ALLOWED_HOSTS = []
+    DEBUG = False
+else:
+    ALLOWED_HOSTS = []
+    DEBUG = True
 
-ALLOWED_HOSTS = []
 
+DATABASES = {
+    'default': dj_database_url.config(default=config('DATABASE_URL'), conn_max_age=600, ssl_require=False)
+}
 
 # Application definition
 
@@ -37,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "repo",
 ]
 
 MIDDLEWARE = [
@@ -72,13 +83,6 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 
 
 # Password validation
