@@ -1,0 +1,1602 @@
+[
+    {
+        "name": "GM Magnus Carlsen",
+        "ranking": "1",
+        "rating": "2837",
+        "player_page_url": "https://www.chess.com/players/magnus-carlsen",
+        "chesscom_profile_url": "https://www.chess.com/member/magnuscarlsen",
+        "chesscom_username": "magnuscarlsen"
+    },
+    {
+        "name": "GM Hikaru Nakamura",
+        "ranking": "2",
+        "rating": "2804",
+        "player_page_url": "https://www.chess.com/players/hikaru-nakamura",
+        "chesscom_profile_url": "https://www.chess.com/member/hikaru",
+        "chesscom_username": "hikaru"
+    },
+    {
+        "name": "GM Gukesh Dommaraju",
+        "ranking": "3",
+        "rating": "2787",
+        "player_page_url": "https://www.chess.com/players/gukesh-dommaraju",
+        "chesscom_profile_url": "https://www.chess.com/member/gukeshdommaraju",
+        "chesscom_username": "gukeshdommaraju"
+    },
+    {
+        "name": "GM Arjun Erigaisi",
+        "ranking": "4",
+        "rating": "2782",
+        "player_page_url": "https://www.chess.com/players/arjun-erigaisi",
+        "chesscom_profile_url": "https://www.chess.com/member/ghandeevam2003",
+        "chesscom_username": "ghandeevam2003"
+    },
+    {
+        "name": "GM Fabiano Caruana",
+        "ranking": "5",
+        "rating": "2776",
+        "player_page_url": "https://www.chess.com/players/fabiano-caruana",
+        "chesscom_profile_url": "https://www.chess.com/member/fabianocaruana",
+        "chesscom_username": "fabianocaruana"
+    },
+    {
+        "name": "GM Nodirbek Abdusattorov",
+        "ranking": "6",
+        "rating": "2771",
+        "player_page_url": "https://www.chess.com/players/nodirbek-abdusattorov",
+        "chesscom_profile_url": "https://www.chess.com/member/chesswarrior7197",
+        "chesscom_username": "chesswarrior7197"
+    },
+    {
+        "name": "GM Wei Yi",
+        "ranking": "7",
+        "rating": "2758",
+        "player_page_url": "https://www.chess.com/players/wei-yi",
+        "chesscom_profile_url": "https://www.chess.com/member/lovevae",
+        "chesscom_username": "lovevae"
+    },
+    {
+        "name": "GM Praggnanandhaa Rameshbabu",
+        "ranking": "7",
+        "rating": "2758",
+        "player_page_url": "https://www.chess.com/players/praggnanandhaa-rameshbabu",
+        "chesscom_profile_url": "https://www.chess.com/member/rpragchess",
+        "chesscom_username": "rpragchess"
+    },
+    {
+        "name": "GM Ian Nepomniachtchi",
+        "ranking": "9",
+        "rating": "2757",
+        "player_page_url": "https://www.chess.com/players/ian-nepomniachtchi",
+        "chesscom_profile_url": "https://www.chess.com/member/lachesisq",
+        "chesscom_username": "lachesisq"
+    },
+    {
+        "name": "GM Alireza Firouzja",
+        "ranking": "9",
+        "rating": "2757",
+        "player_page_url": "https://www.chess.com/players/alireza-firouzja",
+        "chesscom_profile_url": "https://www.chess.com/member/firouzja2003",
+        "chesscom_username": "firouzja2003"
+    },
+    {
+        "name": "GM Wesley So",
+        "ranking": "11",
+        "rating": "2751",
+        "player_page_url": "https://www.chess.com/players/wesley-so",
+        "chesscom_profile_url": "https://www.chess.com/member/gmwso",
+        "chesscom_username": "gmwso"
+    },
+    {
+        "name": "GM Aravindh Chithambaram",
+        "ranking": "12",
+        "rating": "2749",
+        "player_page_url": "https://www.chess.com/players/aravindh-chithambaram",
+        "chesscom_profile_url": "https://www.chess.com/member/vaathi_coming",
+        "chesscom_username": "vaathi_coming"
+    },
+    {
+        "name": "GM Levon Aronian",
+        "ranking": "13",
+        "rating": "2747",
+        "player_page_url": "https://www.chess.com/players/levon-aronian",
+        "chesscom_profile_url": "https://www.chess.com/member/levonaronian",
+        "chesscom_username": "levonaronian"
+    },
+    {
+        "name": "GM Shakhriyar Mamedyarov",
+        "ranking": "14",
+        "rating": "2746",
+        "player_page_url": "https://www.chess.com/players/shakhriyar-mamedyarov",
+        "chesscom_profile_url": "https://www.chess.com/member/azerichess",
+        "chesscom_username": "azerichess"
+    },
+    {
+        "name": "GM Viswanathan Anand",
+        "ranking": "15",
+        "rating": "2743",
+        "player_page_url": "https://www.chess.com/players/viswanathan-anand",
+        "chesscom_profile_url": "https://www.chess.com/member/thevish",
+        "chesscom_username": "thevish"
+    },
+    {
+        "name": "GM Vladimir Fedoseev",
+        "ranking": "16",
+        "rating": "2739",
+        "player_page_url": "https://www.chess.com/players/vladimir-fedoseev",
+        "chesscom_profile_url": "https://www.chess.com/member/bigfish1995",
+        "chesscom_username": "bigfish1995"
+    },
+    {
+        "name": "GM Jan-Krzysztof Duda",
+        "ranking": "16",
+        "rating": "2739",
+        "player_page_url": "https://www.chess.com/players/jan-krzysztof-duda",
+        "chesscom_profile_url": "https://www.chess.com/member/polish_fighter3000",
+        "chesscom_username": "polish_fighter3000"
+    },
+    {
+        "name": "GM Anish Giri",
+        "ranking": "18",
+        "rating": "2738",
+        "player_page_url": "https://www.chess.com/players/anish-giri",
+        "chesscom_profile_url": "https://www.chess.com/member/anishgiri",
+        "chesscom_username": "anishgiri"
+    },
+    {
+        "name": "GM Leinier Dominguez Perez",
+        "ranking": "18",
+        "rating": "2738",
+        "player_page_url": "https://www.chess.com/players/leinier-dominguez-perez",
+        "chesscom_profile_url": "https://www.chess.com/member/dominguezonyoutube",
+        "chesscom_username": "dominguezonyoutube"
+    },
+    {
+        "name": "GM Hans Niemann",
+        "ranking": "20",
+        "rating": "2736",
+        "player_page_url": "https://www.chess.com/players/hans-niemann",
+        "chesscom_profile_url": "https://www.chess.com/member/hansontwitch",
+        "chesscom_username": "hansontwitch"
+    },
+    {
+        "name": "GM Ding Liren",
+        "ranking": "21",
+        "rating": "2734",
+        "player_page_url": "https://www.chess.com/players/ding-liren",
+        "chesscom_profile_url": "https://www.chess.com/member/chefshouse",
+        "chesscom_username": "chefshouse"
+    },
+    {
+        "name": "GM Le Quang Liem",
+        "ranking": "22",
+        "rating": "2729",
+        "player_page_url": "https://www.chess.com/players/le-quang-liem",
+        "chesscom_profile_url": "https://www.chess.com/member/liemle",
+        "chesscom_username": "liemle"
+    },
+    {
+        "name": "GM Maxime Vachier-Lagrave",
+        "ranking": "23",
+        "rating": "2723",
+        "player_page_url": "https://www.chess.com/players/maxime-vachier-lagrave",
+        "chesscom_profile_url": "https://www.chess.com/member/lyonbeast",
+        "chesscom_username": "lyonbeast"
+    },
+    {
+        "name": "GM Richard Rapport",
+        "ranking": "24",
+        "rating": "2722",
+        "player_page_url": "https://www.chess.com/players/richard-rapport",
+        "chesscom_profile_url": "https://www.chess.com/member/lordillidan",
+        "chesscom_username": "lordillidan"
+    },
+    {
+        "name": "GM Vincent Keymer",
+        "ranking": "25",
+        "rating": "2720",
+        "player_page_url": "https://www.chess.com/players/vincent-keymer",
+        "chesscom_profile_url": "https://www.chess.com/member/vincentkeymer",
+        "chesscom_username": "vincentkeymer"
+    },
+    {
+        "name": "GM Vincent Keymer",
+        "ranking": "25",
+        "rating": "2720",
+        "player_page_url": "https://www.chess.com/players/vincent-keymer",
+        "chesscom_profile_url": "https://www.chess.com/member/vincentkeymer",
+        "chesscom_username": "vincentkeymer"
+    },
+    {
+        "name": "GM Veselin Topalov",
+        "ranking": "27",
+        "rating": "2717",
+        "player_page_url": "https://www.chess.com/players/veselin-topalov",
+        "chesscom_profile_url": "https://www.chess.com/member/veselintopalov359",
+        "chesscom_username": "veselintopalov359"
+    },
+    {
+        "name": "GM Yu Yangyi",
+        "ranking": "28",
+        "rating": "2714",
+        "player_page_url": "https://www.chess.com/players/yu-yangyi",
+        "chesscom_profile_url": "https://www.chess.com/member/chesspanda123",
+        "chesscom_username": "chesspanda123"
+    },
+    {
+        "name": "GM Harikrishna Pentala",
+        "ranking": "29",
+        "rating": "2707",
+        "player_page_url": "https://www.chess.com/players/harikrishna-pentala",
+        "chesscom_profile_url": "https://www.chess.com/member/gmharikrishna",
+        "chesscom_username": "gmharikrishna"
+    },
+    {
+        "name": "GM Parham Maghsoodloo",
+        "ranking": "30",
+        "rating": "2706",
+        "player_page_url": "https://www.chess.com/players/parham-maghsoodloo",
+        "chesscom_profile_url": "https://www.chess.com/member/parhamov",
+        "chesscom_username": "parhamov"
+    },
+    {
+        "name": "GM Javokhir Sindarov",
+        "ranking": "30",
+        "rating": "2706",
+        "player_page_url": "https://www.chess.com/players/javokhir-sindarov",
+        "chesscom_profile_url": "https://www.chess.com/member/javokhir_sindarov05",
+        "chesscom_username": "javokhir_sindarov05"
+    },
+    {
+        "name": "GM Wang Hao",
+        "ranking": "32",
+        "rating": "2701",
+        "player_page_url": "https://www.chess.com/players/wang-hao",
+        "chesscom_profile_url": "https://www.chess.com/member/wanghao",
+        "chesscom_username": "wanghao"
+    },
+    {
+        "name": "GM Peter Svidler",
+        "ranking": "33",
+        "rating": "2698",
+        "player_page_url": "https://www.chess.com/players/peter-svidler",
+        "chesscom_profile_url": "https://www.chess.com/member/psvidler",
+        "chesscom_username": "psvidler"
+    },
+    {
+        "name": "GM Awonder Liang",
+        "ranking": "34",
+        "rating": "2696",
+        "player_page_url": "https://www.chess.com/players/awonder-liang",
+        "chesscom_profile_url": "https://www.chess.com/member/rednova1729",
+        "chesscom_username": "rednova1729"
+    },
+    {
+        "name": "GM Dmitry Andreikin",
+        "ranking": "35",
+        "rating": "2695",
+        "player_page_url": "https://www.chess.com/players/dmitry-andreikin",
+        "chesscom_profile_url": "https://www.chess.com/member/fairchess_on_youtube",
+        "chesscom_username": "fairchess_on_youtube"
+    },
+    {
+        "name": "GM Andrey Esipenko",
+        "ranking": "35",
+        "rating": "2695",
+        "player_page_url": "https://www.chess.com/players/andrey-esipenko",
+        "chesscom_profile_url": "https://www.chess.com/member/andreikka",
+        "chesscom_username": "andreikka"
+    },
+    {
+        "name": "GM Sam Sevian",
+        "ranking": "37",
+        "rating": "2694",
+        "player_page_url": "https://www.chess.com/players/sam-sevian",
+        "chesscom_profile_url": "https://www.chess.com/member/konavets",
+        "chesscom_username": "konavets"
+    },
+    {
+        "name": "GM Daniil Dubov",
+        "ranking": "38",
+        "rating": "2693",
+        "player_page_url": "https://www.chess.com/players/daniil-dubov",
+        "chesscom_profile_url": "https://www.chess.com/member/duhless",
+        "chesscom_username": "duhless"
+    },
+    {
+        "name": "GM Nihal Sarin",
+        "ranking": "38",
+        "rating": "2693",
+        "player_page_url": "https://www.chess.com/players/nihal-sarin",
+        "chesscom_profile_url": "https://www.chess.com/member/nihalsarin",
+        "chesscom_username": "nihalsarin"
+    },
+    {
+        "name": "GM Ray Robson",
+        "ranking": "40",
+        "rating": "2692",
+        "player_page_url": "https://www.chess.com/players/ray-robson",
+        "chesscom_profile_url": "https://www.chess.com/member/spicycaterpillar",
+        "chesscom_username": "spicycaterpillar"
+    },
+    {
+        "name": "GM Teimour Radjabov",
+        "ranking": "40",
+        "rating": "2692",
+        "player_page_url": "https://www.chess.com/players/teimour-radjabov",
+        "chesscom_profile_url": "https://www.chess.com/member/tradjabov",
+        "chesscom_username": "tradjabov"
+    },
+    {
+        "name": "GM Jorden van Foreest",
+        "ranking": "42",
+        "rating": "2687",
+        "player_page_url": "https://www.chess.com/players/jorden-van-foreest",
+        "chesscom_profile_url": "https://www.chess.com/member/joppie2",
+        "chesscom_username": "joppie2"
+    },
+    {
+        "name": "GM Alexey Sarana",
+        "ranking": "43",
+        "rating": "2686",
+        "player_page_url": "https://www.chess.com/players/alexey-sarana",
+        "chesscom_profile_url": "https://www.chess.com/member/mishanick",
+        "chesscom_username": "mishanick"
+    },
+    {
+        "name": "GM Bu Xiangzhi",
+        "ranking": "44",
+        "rating": "2684",
+        "player_page_url": "https://www.chess.com/players/bu-xiangzhi",
+        "chesscom_profile_url": "https://www.chess.com/member/chesswolf1210",
+        "chesscom_username": "chesswolf1210"
+    },
+    {
+        "name": "GM Alexander Grischuk",
+        "ranking": "45",
+        "rating": "2682",
+        "player_page_url": "https://www.chess.com/players/alexander-grischuk",
+        "chesscom_profile_url": "https://www.chess.com/member/grischuk",
+        "chesscom_username": "grischuk"
+    },
+    {
+        "name": "GM Vladislav Artemiev",
+        "ranking": "46",
+        "rating": "2679",
+        "player_page_url": "https://www.chess.com/players/vladislav-artemiev",
+        "chesscom_profile_url": "https://www.chess.com/member/sibelephant",
+        "chesscom_username": "sibelephant"
+    },
+    {
+        "name": "GM Igor Kovalenko",
+        "ranking": "47",
+        "rating": "2676",
+        "player_page_url": "https://www.chess.com/players/igor-kovalenko",
+        "chesscom_profile_url": "https://www.chess.com/member/igorkovalenko",
+        "chesscom_username": "igorkovalenko"
+    },
+    {
+        "name": "GM Rustam Kasimdzhanov",
+        "ranking": "48",
+        "rating": "2675",
+        "player_page_url": "https://www.chess.com/players/rustam-kasimdzhanov",
+        "chesscom_profile_url": "https://www.chess.com/member/solingen2020",
+        "chesscom_username": "solingen2020"
+    },
+    {
+        "name": "GM Thai Dai Van Nguyen",
+        "ranking": "49",
+        "rating": "2674",
+        "player_page_url": "https://www.chess.com/players/thai-dai-van-nguyen",
+        "chesscom_profile_url": "https://www.chess.com/member/ntdvan12",
+        "chesscom_username": "ntdvan12"
+    },
+    {
+        "name": "GM Raunak Sadhwani",
+        "ranking": "50",
+        "rating": "2672",
+        "player_page_url": "https://www.chess.com/players/raunak-sadhwani",
+        "chesscom_profile_url": "https://www.chess.com/member/raunaksadhwani2005",
+        "chesscom_username": "raunaksadhwani2005"
+    },
+    {
+        "name": "GM Nikita Vitiugov",
+        "ranking": "51",
+        "rating": "2671",
+        "player_page_url": "https://www.chess.com/players/nikita-vitiugov",
+        "chesscom_profile_url": "https://www.chess.com/member/colchonero64",
+        "chesscom_username": "colchonero64"
+    },
+    {
+        "name": "GM Frederik Svane",
+        "ranking": "51",
+        "rating": "2671",
+        "player_page_url": "https://www.chess.com/players/frederik-svane",
+        "chesscom_profile_url": "https://www.chess.com/member/frederiksvane",
+        "chesscom_username": "frederiksvane"
+    },
+    {
+        "name": "GM Amin Tabatabaei",
+        "ranking": "53",
+        "rating": "2670",
+        "player_page_url": "https://www.chess.com/players/amin-tabatabaei",
+        "chesscom_profile_url": "https://www.chess.com/member/amintabatabaei",
+        "chesscom_username": "amintabatabaei"
+    },
+    {
+        "name": "GM David Howell",
+        "ranking": "54",
+        "rating": "2668",
+        "player_page_url": "https://www.chess.com/players/david-howell",
+        "chesscom_profile_url": "https://www.chess.com/member/howitzer14",
+        "chesscom_username": "howitzer14"
+    },
+    {
+        "name": "GM Pavel Eljanov",
+        "ranking": "54",
+        "rating": "2668",
+        "player_page_url": "https://www.chess.com/players/pavel-eljanov",
+        "chesscom_profile_url": "https://www.chess.com/member/eljanov",
+        "chesscom_username": "eljanov"
+    },
+    {
+        "name": "GM Bogdan-Daniel Deac",
+        "ranking": "54",
+        "rating": "2668",
+        "player_page_url": "https://www.chess.com/players/bogdan-daniel-deac",
+        "chesscom_profile_url": "https://www.chess.com/member/bogdandeac",
+        "chesscom_username": "bogdandeac"
+    },
+    {
+        "name": "GM Peter Leko",
+        "ranking": "57",
+        "rating": "2666",
+        "player_page_url": "https://www.chess.com/players/peter-leko",
+        "chesscom_profile_url": "https://www.chess.com/member/peterleko",
+        "chesscom_username": "peterleko"
+    },
+    {
+        "name": "GM Sam Shankland",
+        "ranking": "57",
+        "rating": "2666",
+        "player_page_url": "https://www.chess.com/players/sam-shankland",
+        "chesscom_profile_url": "https://www.chess.com/member/shankland",
+        "chesscom_username": "shankland"
+    },
+    {
+        "name": "GM Shant Sargsyan",
+        "ranking": "57",
+        "rating": "2666",
+        "player_page_url": "https://www.chess.com/players/shant-sargsyan",
+        "chesscom_profile_url": "https://www.chess.com/member/sargsyan_shant",
+        "chesscom_username": "sargsyan_shant"
+    },
+    {
+        "name": "GM Nodirbek Yakubboev",
+        "ranking": "60",
+        "rating": "2665",
+        "player_page_url": "https://www.chess.com/players/nodirbek-yakubboev",
+        "chesscom_profile_url": "https://www.chess.com/member/aquarium76",
+        "chesscom_username": "aquarium76"
+    },
+    {
+        "name": "GM Ivan Saric",
+        "ranking": "61",
+        "rating": "2663",
+        "player_page_url": "https://www.chess.com/players/ivan-saric",
+        "chesscom_profile_url": "https://www.chess.com/member/dalmatinac101",
+        "chesscom_username": "dalmatinac101"
+    },
+    {
+        "name": "GM Benjamin Gledura",
+        "ranking": "61",
+        "rating": "2663",
+        "player_page_url": "https://www.chess.com/players/benjamin-gledura",
+        "chesscom_profile_url": "https://www.chess.com/member/promen1999",
+        "chesscom_username": "promen1999"
+    },
+    {
+        "name": "GM Michael Adams",
+        "ranking": "63",
+        "rating": "2661",
+        "player_page_url": "https://www.chess.com/players/michael-adams",
+        "chesscom_profile_url": "https://www.chess.com/member/gmmickeyadams",
+        "chesscom_username": "gmmickeyadams"
+    },
+    {
+        "name": "GM Grigoriy Oparin",
+        "ranking": "64",
+        "rating": "2660",
+        "player_page_url": "https://www.chess.com/players/grigoriy-oparin",
+        "chesscom_profile_url": "https://www.chess.com/member/oparingrigoriy",
+        "chesscom_username": "oparingrigoriy"
+    },
+    {
+        "name": "GM Matthias Bluebaum",
+        "ranking": "64",
+        "rating": "2660",
+        "player_page_url": "https://www.chess.com/players/matthias-bluebaum",
+        "chesscom_profile_url": "https://www.chess.com/member/msb2",
+        "chesscom_username": "msb2"
+    },
+    {
+        "name": "GM Volodar Murzin",
+        "ranking": "66",
+        "rating": "2658",
+        "player_page_url": "https://www.chess.com/players/volodar-murzin",
+        "chesscom_profile_url": "https://www.chess.com/member/volodar_murzin",
+        "chesscom_username": "volodar_murzin"
+    },
+    {
+        "name": "GM Karthikeyan Murali",
+        "ranking": "66",
+        "rating": "2658",
+        "player_page_url": "https://www.chess.com/players/karthikeyan-murali",
+        "chesscom_profile_url": "https://www.chess.com/member/youngkid",
+        "chesscom_username": "youngkid"
+    },
+    {
+        "name": "GM David Navara",
+        "ranking": "68",
+        "rating": "2657",
+        "player_page_url": "https://www.chess.com/players/david-navara",
+        "chesscom_profile_url": "https://www.chess.com/member/formerprodigy",
+        "chesscom_username": "formerprodigy"
+    },
+    {
+        "name": "GM Rauf Mamedov",
+        "ranking": "68",
+        "rating": "2657",
+        "player_page_url": "https://www.chess.com/players/rauf-mamedov",
+        "chesscom_profile_url": "https://www.chess.com/member/muisback26",
+        "chesscom_username": "muisback26"
+    },
+    {
+        "name": "GM Alexander Morozevich",
+        "ranking": "70",
+        "rating": "2656",
+        "player_page_url": "https://www.chess.com/players/alexander-morozevich",
+        "chesscom_profile_url": "https://www.chess.com/member/quaternitychess",
+        "chesscom_username": "quaternitychess"
+    },
+    {
+        "name": "GM Daniil Yuffa",
+        "ranking": "71",
+        "rating": "2655",
+        "player_page_url": "https://www.chess.com/players/daniil-yuffa",
+        "chesscom_profile_url": null,
+        "chesscom_username": null
+    },
+    {
+        "name": "GM Radoslaw Wojtaszek",
+        "ranking": "71",
+        "rating": "2655",
+        "player_page_url": "https://www.chess.com/players/radoslaw-wojtaszek",
+        "chesscom_profile_url": "https://www.chess.com/member/radzio1987",
+        "chesscom_username": "radzio1987"
+    },
+    {
+        "name": "GM Kirill Alekseenko",
+        "ranking": "73",
+        "rating": "2654",
+        "player_page_url": "https://www.chess.com/players/kirill-alekseenko",
+        "chesscom_profile_url": "https://www.chess.com/member/bilodeaua",
+        "chesscom_username": "bilodeaua"
+    },
+    {
+        "name": "GM Gawain Jones",
+        "ranking": "74",
+        "rating": "2653",
+        "player_page_url": "https://www.chess.com/players/gawain-jones",
+        "chesscom_profile_url": "https://www.chess.com/member/verdenotte",
+        "chesscom_username": "verdenotte"
+    },
+    {
+        "name": "GM Kirill Shevchenko",
+        "ranking": "74",
+        "rating": "2653",
+        "player_page_url": "https://www.chess.com/players/kirill-shevchenko",
+        "chesscom_profile_url": "https://www.chess.com/member/kirillshevchenko",
+        "chesscom_username": "kirillshevchenko"
+    },
+    {
+        "name": "GM Boris Gelfand",
+        "ranking": "76",
+        "rating": "2652",
+        "player_page_url": "https://www.chess.com/players/boris-gelfand",
+        "chesscom_profile_url": "https://www.chess.com/member/remontada2017",
+        "chesscom_username": "remontada2017"
+    },
+    {
+        "name": "GM Daniel Dardha",
+        "ranking": "77",
+        "rating": "2651",
+        "player_page_url": "https://www.chess.com/players/daniel-dardha",
+        "chesscom_profile_url": "https://www.chess.com/member/danieldardha2005",
+        "chesscom_username": "danieldardha2005"
+    },
+    {
+        "name": "GM Ernesto Inarkiev",
+        "ranking": "78",
+        "rating": "2650",
+        "player_page_url": "https://www.chess.com/players/ernesto-inarkiev",
+        "chesscom_profile_url": "https://www.chess.com/member/vorenus_lucius",
+        "chesscom_username": "vorenus_lucius"
+    },
+    {
+        "name": "GM Bassem Amin",
+        "ranking": "79",
+        "rating": "2649",
+        "player_page_url": "https://www.chess.com/players/bassem-amin",
+        "chesscom_profile_url": "https://www.chess.com/member/dr-bassem",
+        "chesscom_username": "dr-bassem"
+    },
+    {
+        "name": "GM Lu Shanglei",
+        "ranking": "80",
+        "rating": "2647",
+        "player_page_url": "https://www.chess.com/players/lu-shanglei",
+        "chesscom_profile_url": "https://www.chess.com/member/wudileige",
+        "chesscom_username": "wudileige"
+    },
+    {
+        "name": "GM Maxim Rodshtein",
+        "ranking": "81",
+        "rating": "2645",
+        "player_page_url": "https://www.chess.com/players/maxim-rodshtein",
+        "chesscom_profile_url": "https://www.chess.com/member/colerranmorad",
+        "chesscom_username": "colerranmorad"
+    },
+    {
+        "name": "GM Vasyl Ivanchuk",
+        "ranking": "82",
+        "rating": "2644",
+        "player_page_url": "https://www.chess.com/players/vasyl-ivanchuk",
+        "chesscom_profile_url": "https://www.chess.com/member/viviania",
+        "chesscom_username": "viviania"
+    },
+    {
+        "name": "GM David Anton Guijarro",
+        "ranking": "83",
+        "rating": "2642",
+        "player_page_url": "https://www.chess.com/players/david-anton-guijarro",
+        "chesscom_profile_url": "https://www.chess.com/member/tptagain",
+        "chesscom_username": "tptagain"
+    },
+    {
+        "name": "GM Vladimir Malakhov",
+        "ranking": "83",
+        "rating": "2642",
+        "player_page_url": "https://www.chess.com/players/vladimir-malakhov",
+        "chesscom_profile_url": "https://www.chess.com/member/vladimir_2020",
+        "chesscom_username": "vladimir_2020"
+    },
+    {
+        "name": "GM Johan-Sebastian Christiansen",
+        "ranking": "83",
+        "rating": "2642",
+        "player_page_url": "https://www.chess.com/players/johan-sebastian-christiansen",
+        "chesscom_profile_url": "https://www.chess.com/member/jsprepz",
+        "chesscom_username": "jsprepz"
+    },
+    {
+        "name": "GM Shamsiddin Vokhidov",
+        "ranking": "86",
+        "rating": "2641",
+        "player_page_url": "https://www.chess.com/players/shamsiddin-vokhidov",
+        "chesscom_profile_url": "https://www.chess.com/member/shield12",
+        "chesscom_username": "shield12"
+    },
+    {
+        "name": "GM Gabriel Sargissian",
+        "ranking": "86",
+        "rating": "2641",
+        "player_page_url": "https://www.chess.com/players/gabriel-sargissian",
+        "chesscom_profile_url": "https://www.chess.com/member/arm-akiba",
+        "chesscom_username": "arm-akiba"
+    },
+    {
+        "name": "GM Ivan Cheparinov",
+        "ranking": "86",
+        "rating": "2641",
+        "player_page_url": "https://www.chess.com/players/ivan-cheparinov",
+        "chesscom_profile_url": "https://www.chess.com/member/gmcheparinov",
+        "chesscom_username": "gmcheparinov"
+    },
+    {
+        "name": "GM Jonas Buhl Bjerre",
+        "ranking": "86",
+        "rating": "2641",
+        "player_page_url": "https://www.chess.com/players/jonas-buhl-bjerre",
+        "chesscom_profile_url": "https://www.chess.com/member/lilleper1",
+        "chesscom_username": "lilleper1"
+    },
+    {
+        "name": "GM Francisco Vallejo Pons",
+        "ranking": "90",
+        "rating": "2638",
+        "player_page_url": "https://www.chess.com/players/francisco-vallejo-pons",
+        "chesscom_profile_url": "https://www.chess.com/member/gmvallejo",
+        "chesscom_username": "gmvallejo"
+    },
+    {
+        "name": "GM Sanan Sjugirov",
+        "ranking": "90",
+        "rating": "2638",
+        "player_page_url": "https://www.chess.com/players/sanan-sjugirov",
+        "chesscom_profile_url": "https://www.chess.com/member/sanan_sjugirov",
+        "chesscom_username": "sanan_sjugirov"
+    },
+    {
+        "name": "GM Nils Grandelius",
+        "ranking": "92",
+        "rating": "2637",
+        "player_page_url": "https://www.chess.com/players/nils-grandelius",
+        "chesscom_profile_url": "https://www.chess.com/member/grandelicious",
+        "chesscom_username": "grandelicious"
+    },
+    {
+        "name": "GM Aleksandar Indjic",
+        "ranking": "92",
+        "rating": "2637",
+        "player_page_url": "https://www.chess.com/players/aleksandar-indjic",
+        "chesscom_profile_url": "https://www.chess.com/member/beca95",
+        "chesscom_username": "beca95"
+    },
+    {
+        "name": "GM Jeffery Xiong",
+        "ranking": "94",
+        "rating": "2636",
+        "player_page_url": "https://www.chess.com/players/jeffery-xiong",
+        "chesscom_profile_url": "https://www.chess.com/member/jefferyx",
+        "chesscom_username": "jefferyx"
+    },
+    {
+        "name": "GM Hrant Melkumyan",
+        "ranking": "94",
+        "rating": "2636",
+        "player_page_url": "https://www.chess.com/players/hrant-melkumyan",
+        "chesscom_profile_url": "https://www.chess.com/member/hrant_chessmood",
+        "chesscom_username": "hrant_chessmood"
+    },
+    {
+        "name": "GM Ediz Gurel",
+        "ranking": "94",
+        "rating": "2636",
+        "player_page_url": "https://www.chess.com/players/ediz-gurel",
+        "chesscom_profile_url": "https://www.chess.com/member/gurelediz",
+        "chesscom_username": "gurelediz"
+    },
+    {
+        "name": "GM Aryan Tari",
+        "ranking": "94",
+        "rating": "2636",
+        "player_page_url": "https://www.chess.com/players/aryan-tari",
+        "chesscom_profile_url": "https://www.chess.com/member/aryantari",
+        "chesscom_username": "aryantari"
+    },
+    {
+        "name": "GM Robert Hovhannisyan",
+        "ranking": "98",
+        "rating": "2635",
+        "player_page_url": "https://www.chess.com/players/robert-hovhannisyan",
+        "chesscom_profile_url": "https://www.chess.com/member/robert_chessmood",
+        "chesscom_username": "robert_chessmood"
+    },
+    {
+        "name": "GM Haik Martirosyan",
+        "ranking": "98",
+        "rating": "2635",
+        "player_page_url": "https://www.chess.com/players/haik-martirosyan",
+        "chesscom_profile_url": "https://www.chess.com/member/micki-taryan",
+        "chesscom_username": "micki-taryan"
+    },
+    {
+        "name": "GM Maksim Chigaev",
+        "ranking": "98",
+        "rating": "2635",
+        "player_page_url": "https://www.chess.com/players/maksim-chigaev",
+        "chesscom_profile_url": "https://www.chess.com/member/fandorine",
+        "chesscom_username": "fandorine"
+    },
+    {
+        "name": "GM Hou Yifan",
+        "ranking": "101",
+        "rating": "2633",
+        "player_page_url": "https://www.chess.com/players/hou-yifan",
+        "chesscom_profile_url": "https://www.chess.com/member/yifan0227",
+        "chesscom_username": "yifan0227"
+    },
+    {
+        "name": "GM Yuriy Kryvoruchko",
+        "ranking": "101",
+        "rating": "2633",
+        "player_page_url": "https://www.chess.com/players/yuriy-kryvoruchko",
+        "chesscom_profile_url": "https://www.chess.com/member/y_kryvoruchko",
+        "chesscom_username": "y_kryvoruchko"
+    },
+    {
+        "name": "GM Etienne Bacrot",
+        "ranking": "101",
+        "rating": "2633",
+        "player_page_url": "https://www.chess.com/players/etienne-bacrot",
+        "chesscom_profile_url": "https://www.chess.com/member/baki83",
+        "chesscom_username": "baki83"
+    },
+    {
+        "name": "GM Nguyen Ngoc Truong Son",
+        "ranking": "104",
+        "rating": "2632",
+        "player_page_url": "https://www.chess.com/players/nguyen-ngoc-truong-son",
+        "chesscom_profile_url": "https://www.chess.com/member/crescentmoon2411",
+        "chesscom_username": "crescentmoon2411"
+    },
+    {
+        "name": "GM Anton Korobov",
+        "ranking": "105",
+        "rating": "2631",
+        "player_page_url": "https://www.chess.com/players/anton-korobov",
+        "chesscom_profile_url": "https://www.chess.com/member/gogieff",
+        "chesscom_username": "gogieff"
+    },
+    {
+        "name": "GM Alexandr Predke",
+        "ranking": "105",
+        "rating": "2631",
+        "player_page_url": "https://www.chess.com/players/alexandr-predke",
+        "chesscom_profile_url": "https://www.chess.com/member/alexandr_predke",
+        "chesscom_username": "alexandr_predke"
+    },
+    {
+        "name": "GM Saleh Salem",
+        "ranking": "105",
+        "rating": "2631",
+        "player_page_url": "https://www.chess.com/players/saleh-salem",
+        "chesscom_profile_url": "https://www.chess.com/member/salem-ar",
+        "chesscom_username": "salem-ar"
+    },
+    {
+        "name": "GM Leon Luke Mendonca",
+        "ranking": "108",
+        "rating": "2630",
+        "player_page_url": "https://www.chess.com/players/leon-luke-mendonca",
+        "chesscom_profile_url": "https://www.chess.com/member/liontheleon_06",
+        "chesscom_username": "liontheleon_06"
+    },
+    {
+        "name": "GM Pouya Idani",
+        "ranking": "108",
+        "rating": "2630",
+        "player_page_url": "https://www.chess.com/players/pouya-idani",
+        "chesscom_profile_url": "https://www.chess.com/member/pouya21",
+        "chesscom_username": "pouya21"
+    },
+    {
+        "name": "GM Ma Qun",
+        "ranking": "108",
+        "rating": "2630",
+        "player_page_url": "https://www.chess.com/players/ma-qun",
+        "chesscom_profile_url": "https://www.chess.com/member/defenceboy",
+        "chesscom_username": "defenceboy"
+    },
+    {
+        "name": "GM Velimir Ivic",
+        "ranking": "108",
+        "rating": "2630",
+        "player_page_url": "https://www.chess.com/players/velimir-ivic",
+        "chesscom_profile_url": "https://www.chess.com/member/drvelja",
+        "chesscom_username": "drvelja"
+    },
+    {
+        "name": "GM Rasmus Svane",
+        "ranking": "112",
+        "rating": "2629",
+        "player_page_url": "https://www.chess.com/players/rasmus-svane",
+        "chesscom_profile_url": "https://www.chess.com/member/rasmussvane",
+        "chesscom_username": "rasmussvane"
+    },
+    {
+        "name": "GM Arkadij Naiditsch",
+        "ranking": "112",
+        "rating": "2629",
+        "player_page_url": "https://www.chess.com/players/arkadij-naiditsch",
+        "chesscom_profile_url": "https://www.chess.com/member/captainjames",
+        "chesscom_username": "captainjames"
+    },
+    {
+        "name": "GM Wang Yue",
+        "ranking": "114",
+        "rating": "2628",
+        "player_page_url": "https://www.chess.com/players/wang-yue",
+        "chesscom_profile_url": "https://www.chess.com/member/chesswy",
+        "chesscom_username": "chesswy"
+    },
+    {
+        "name": "GM Konstantin Landa",
+        "ranking": "101",
+        "rating": "2633",
+        "player_page_url": "https://www.chess.com/players/konstantin-landa",
+        "chesscom_profile_url": null,
+        "chesscom_username": null
+    },
+    {
+        "name": "GM Maxim Matlakov",
+        "ranking": "115",
+        "rating": "2626",
+        "player_page_url": "https://www.chess.com/players/maxim-matlakov",
+        "chesscom_profile_url": "https://www.chess.com/member/billiekimbah",
+        "chesscom_username": "billiekimbah"
+    },
+    {
+        "name": "GM Andrei Volokitin",
+        "ranking": "115",
+        "rating": "2626",
+        "player_page_url": "https://www.chess.com/players/andrei-volokitin",
+        "chesscom_profile_url": "https://www.chess.com/member/gmvolokitin",
+        "chesscom_username": "gmvolokitin"
+    },
+    {
+        "name": "GM Ioannis Papaioannou",
+        "ranking": "115",
+        "rating": "2626",
+        "player_page_url": "https://www.chess.com/players/ioannis-papaioannou",
+        "chesscom_profile_url": null,
+        "chesscom_username": null
+    },
+    {
+        "name": "GM Luka Lenic",
+        "ranking": "115",
+        "rating": "2626",
+        "player_page_url": "https://www.chess.com/players/luka-lenic",
+        "chesscom_profile_url": "https://www.chess.com/member/michelangelo",
+        "chesscom_username": "michelangelo"
+    },
+    {
+        "name": "GM Dmitrij Kollars",
+        "ranking": "119",
+        "rating": "2625",
+        "player_page_url": "https://www.chess.com/players/dmitrij-kollars",
+        "chesscom_profile_url": "https://www.chess.com/member/gm_dmitrij",
+        "chesscom_username": "gm_dmitrij"
+    },
+    {
+        "name": "GM Li Chao",
+        "ranking": "120",
+        "rating": "2624",
+        "player_page_url": "https://www.chess.com/players/li-chao",
+        "chesscom_profile_url": "https://www.chess.com/member/chessawp",
+        "chesscom_username": "chessawp"
+    },
+    {
+        "name": "GM Abhimanyu Puranik",
+        "ranking": "120",
+        "rating": "2624",
+        "player_page_url": "https://www.chess.com/players/abhimanyu-puranik",
+        "chesscom_profile_url": "https://www.chess.com/member/abhidabhi",
+        "chesscom_username": "abhidabhi"
+    },
+    {
+        "name": "GM Evgeniy Najer",
+        "ranking": "122",
+        "rating": "2623",
+        "player_page_url": "https://www.chess.com/players/evgeniy-najer",
+        "chesscom_profile_url": "https://www.chess.com/member/enajer77",
+        "chesscom_username": "enajer77"
+    },
+    {
+        "name": "GM Xu Xiangyu",
+        "ranking": "122",
+        "rating": "2623",
+        "player_page_url": "https://www.chess.com/players/xu-xiangyu",
+        "chesscom_profile_url": "https://www.chess.com/member/xxysoul6",
+        "chesscom_username": "xxysoul6"
+    },
+    {
+        "name": "GM Ruslan Ponomariov",
+        "ranking": "124",
+        "rating": "2622",
+        "player_page_url": "https://www.chess.com/players/ruslan-ponomariov",
+        "chesscom_profile_url": "https://www.chess.com/member/mashaputina1985",
+        "chesscom_username": "mashaputina1985"
+    },
+    {
+        "name": "GM Maxime Lagarde",
+        "ranking": "124",
+        "rating": "2622",
+        "player_page_url": "https://www.chess.com/players/maxime-lagarde",
+        "chesscom_profile_url": "https://www.chess.com/member/rikikits",
+        "chesscom_username": "rikikits"
+    },
+    {
+        "name": "GM Pranav Venkatesh",
+        "ranking": "126",
+        "rating": "2621",
+        "player_page_url": "https://www.chess.com/players/pranav-venkatesh",
+        "chesscom_profile_url": "https://www.chess.com/member/vi_pranav",
+        "chesscom_username": "vi_pranav"
+    },
+    {
+        "name": "GM Bardiya Daneshvar",
+        "ranking": "126",
+        "rating": "2621",
+        "player_page_url": "https://www.chess.com/players/bardiya-daneshvar",
+        "chesscom_profile_url": "https://www.chess.com/member/bardiya_daneshvar",
+        "chesscom_username": "bardiya_daneshvar"
+    },
+    {
+        "name": "GM Erwin l'Ami",
+        "ranking": "126",
+        "rating": "2621",
+        "player_page_url": "https://www.chess.com/players/erwin-lami",
+        "chesscom_profile_url": "https://www.chess.com/member/erwinlami",
+        "chesscom_username": "erwinlami"
+    },
+    {
+        "name": "GM Alexei Shirov",
+        "ranking": "129",
+        "rating": "2620",
+        "player_page_url": "https://www.chess.com/players/alexei-shirov",
+        "chesscom_profile_url": "https://www.chess.com/member/alexeishirov",
+        "chesscom_username": "alexeishirov"
+    },
+    {
+        "name": "GM Nijat Abasov",
+        "ranking": "129",
+        "rating": "2620",
+        "player_page_url": "https://www.chess.com/players/nijat-abasov",
+        "chesscom_profile_url": "https://www.chess.com/member/abasovn",
+        "chesscom_username": "abasovn"
+    },
+    {
+        "name": "GM Eltaj Safarli",
+        "ranking": "129",
+        "rating": "2620",
+        "player_page_url": "https://www.chess.com/players/eltaj-safarli",
+        "chesscom_profile_url": null,
+        "chesscom_username": null
+    },
+    {
+        "name": "GM Jaime Santos Latasa",
+        "ranking": "129",
+        "rating": "2620",
+        "player_page_url": "https://www.chess.com/players/jaime-santos-latasa",
+        "chesscom_profile_url": "https://www.chess.com/member/h4parah5",
+        "chesscom_username": "h4parah5"
+    },
+    {
+        "name": "GM Aram Hakobyan",
+        "ranking": "129",
+        "rating": "2620",
+        "player_page_url": "https://www.chess.com/players/aram-hakobyan",
+        "chesscom_profile_url": "https://www.chess.com/member/njal28",
+        "chesscom_username": "njal28"
+    },
+    {
+        "name": "GM Aryan Chopra",
+        "ranking": "129",
+        "rating": "2620",
+        "player_page_url": "https://www.chess.com/players/aryan-chopra",
+        "chesscom_profile_url": "https://www.chess.com/member/deadeye10",
+        "chesscom_username": "deadeye10"
+    },
+    {
+        "name": "GM Anton Demchenko",
+        "ranking": "135",
+        "rating": "2619",
+        "player_page_url": "https://www.chess.com/players/anton-demchenko",
+        "chesscom_profile_url": "https://www.chess.com/member/anton_demchenko",
+        "chesscom_username": "anton_demchenko"
+    },
+    {
+        "name": "GM Yagiz Kaan Erdogmus",
+        "ranking": "136",
+        "rating": "2618",
+        "player_page_url": "https://www.chess.com/players/yagiz-kaan-erdogmus",
+        "chesscom_profile_url": "https://www.chess.com/member/legendisback1",
+        "chesscom_username": "legendisback1"
+    },
+    {
+        "name": "GM Aydin Suleymanli",
+        "ranking": "137",
+        "rating": "2617",
+        "player_page_url": "https://www.chess.com/players/aydin-suleymanli",
+        "chesscom_profile_url": "https://www.chess.com/member/lastgladiator1",
+        "chesscom_username": "lastgladiator1"
+    },
+    {
+        "name": "GM Peter Heine Nielsen",
+        "ranking": "137",
+        "rating": "2617",
+        "player_page_url": "https://www.chess.com/players/peter-heine-nielsen",
+        "chesscom_profile_url": null,
+        "chesscom_username": null
+    },
+    {
+        "name": "GM Dennis Wagner",
+        "ranking": "139",
+        "rating": "2616",
+        "player_page_url": "https://www.chess.com/players/dennis-wagner",
+        "chesscom_profile_url": "https://www.chess.com/member/chessdjw",
+        "chesscom_username": "chessdjw"
+    },
+    {
+        "name": "GM Luke McShane",
+        "ranking": "140",
+        "rating": "2615",
+        "player_page_url": "https://www.chess.com/players/luke-mcshane",
+        "chesscom_profile_url": "https://www.chess.com/member/lmcshane",
+        "chesscom_username": "lmcshane"
+    },
+    {
+        "name": "GM Alexander Donchenko",
+        "ranking": "140",
+        "rating": "2615",
+        "player_page_url": "https://www.chess.com/players/alexander-donchenko",
+        "chesscom_profile_url": "https://www.chess.com/member/alexander_donchenko",
+        "chesscom_username": "alexander_donchenko"
+    },
+    {
+        "name": "GM Ivan Popov",
+        "ranking": "142",
+        "rating": "2613",
+        "player_page_url": "https://www.chess.com/players/ivan-popov",
+        "chesscom_profile_url": "https://www.chess.com/member/popov_ivan",
+        "chesscom_username": "popov_ivan"
+    },
+    {
+        "name": "GM Ferenc Berkes",
+        "ranking": "142",
+        "rating": "2613",
+        "player_page_url": "https://www.chess.com/players/ferenc-berkes",
+        "chesscom_profile_url": "https://www.chess.com/member/berkesferi",
+        "chesscom_username": "berkesferi"
+    },
+    {
+        "name": "GM Tamir Nabaty",
+        "ranking": "142",
+        "rating": "2613",
+        "player_page_url": "https://www.chess.com/players/tamir-nabaty",
+        "chesscom_profile_url": "https://www.chess.com/member/tamirnabaty",
+        "chesscom_username": "tamirnabaty"
+    },
+    {
+        "name": "GM Vasif Durarbayli",
+        "ranking": "145",
+        "rating": "2612",
+        "player_page_url": "https://www.chess.com/players/vasif-durarbayli",
+        "chesscom_profile_url": "https://www.chess.com/member/durarbayli",
+        "chesscom_username": "durarbayli"
+    },
+    {
+        "name": "GM Max Warmerdam",
+        "ranking": "147",
+        "rating": "2611",
+        "player_page_url": "https://www.chess.com/players/max-warmerdam",
+        "chesscom_profile_url": "https://www.chess.com/member/xamax2000",
+        "chesscom_username": "xamax2000"
+    },
+    {
+        "name": "GM Samvel Ter-Sahakyan",
+        "ranking": "147",
+        "rating": "2611",
+        "player_page_url": "https://www.chess.com/players/samvel-ter-sahakyan",
+        "chesscom_profile_url": "https://www.chess.com/member/sam_chessmood",
+        "chesscom_username": "sam_chessmood"
+    },
+    {
+        "name": "GM Nikolas Theodorou",
+        "ranking": "147",
+        "rating": "2611",
+        "player_page_url": "https://www.chess.com/players/nikolas-theodorou",
+        "chesscom_profile_url": "https://www.chess.com/member/nikotheodorou",
+        "chesscom_username": "nikotheodorou"
+    },
+    {
+        "name": "GM Jose Eduardo Martinez Alcantara",
+        "ranking": "147",
+        "rating": "2611",
+        "player_page_url": "https://www.chess.com/players/jose-eduardo-martinez-alcantara",
+        "chesscom_profile_url": "https://www.chess.com/member/jospem",
+        "chesscom_username": "jospem"
+    },
+    {
+        "name": "GM Eric Hansen",
+        "ranking": "151",
+        "rating": "2609",
+        "player_page_url": "https://www.chess.com/players/eric-hansen",
+        "chesscom_profile_url": "https://www.chess.com/member/hansen",
+        "chesscom_username": "hansen"
+    },
+    {
+        "name": "GM Loek van Wely",
+        "ranking": "151",
+        "rating": "2609",
+        "player_page_url": "https://www.chess.com/players/loek-van-wely",
+        "chesscom_profile_url": "https://www.chess.com/member/kingloek",
+        "chesscom_username": "kingloek"
+    },
+    {
+        "name": "GM Jon Ludvig Hammer",
+        "ranking": "153",
+        "rating": "2608",
+        "player_page_url": "https://www.chess.com/players/jon-ludvig-hammer",
+        "chesscom_profile_url": "https://www.chess.com/member/gmjlh",
+        "chesscom_username": "gmjlh"
+    },
+    {
+        "name": "GM Marc'Andria Maurizzi",
+        "ranking": "154",
+        "rating": "2607",
+        "player_page_url": "https://www.chess.com/players/marc-andria-maurizzi",
+        "chesscom_profile_url": "https://www.chess.com/member/marcan2b",
+        "chesscom_username": "marcan2b"
+    },
+    {
+        "name": "GM Gata Kamsky",
+        "ranking": "155",
+        "rating": "2606",
+        "player_page_url": "https://www.chess.com/players/gata-kamsky",
+        "chesscom_profile_url": "https://www.chess.com/member/tigrvshlyape",
+        "chesscom_username": "tigrvshlyape"
+    },
+    {
+        "name": "GM Yuriy Kuzubov",
+        "ranking": "156",
+        "rating": "2605",
+        "player_page_url": "https://www.chess.com/players/yuriy-kuzubov",
+        "chesscom_profile_url": "https://www.chess.com/member/kuzubovyuriy",
+        "chesscom_username": "kuzubovyuriy"
+    },
+    {
+        "name": "GM Abhimanyu Mishra",
+        "ranking": "156",
+        "rating": "2605",
+        "player_page_url": "https://www.chess.com/players/abhimanyu-mishra",
+        "chesscom_profile_url": "https://www.chess.com/member/pursuitofhappyness2",
+        "chesscom_username": "pursuitofhappyness2"
+    },
+    {
+        "name": "GM Tamas Banusz",
+        "ranking": "156",
+        "rating": "2605",
+        "player_page_url": "https://www.chess.com/players/tamas-banusz",
+        "chesscom_profile_url": "https://www.chess.com/member/bancsoo",
+        "chesscom_username": "bancsoo"
+    },
+    {
+        "name": "GM Imre Balog",
+        "ranking": "159",
+        "rating": "2603",
+        "player_page_url": "https://www.chess.com/players/imre-balog",
+        "chesscom_profile_url": "https://www.chess.com/member/imre91",
+        "chesscom_username": "imre91"
+    },
+    {
+        "name": "FMVladimir Afromeev",
+        "ranking": "159",
+        "rating": "2603",
+        "player_page_url": "https://www.chess.com/players/vladimir-afromeev",
+        "chesscom_profile_url": null,
+        "chesscom_username": null
+    },
+    {
+        "name": "GM Mahammad Muradli",
+        "ranking": "159",
+        "rating": "2603",
+        "player_page_url": "https://www.chess.com/players/mahammad-muradli",
+        "chesscom_profile_url": "https://www.chess.com/member/chesslover0108",
+        "chesscom_username": "chesslover0108"
+    },
+    {
+        "name": "GM Vladimir Onischuk",
+        "ranking": "162",
+        "rating": "2602",
+        "player_page_url": "https://www.chess.com/players/vladimir-onischuk",
+        "chesscom_profile_url": "https://www.chess.com/member/onyshchuk_v",
+        "chesscom_username": "onyshchuk_v"
+    },
+    {
+        "name": "GM Szymon Gumularz",
+        "ranking": "162",
+        "rating": "2602",
+        "player_page_url": "https://www.chess.com/players/szymon-gumularz",
+        "chesscom_profile_url": "https://www.chess.com/member/sgchess01",
+        "chesscom_username": "sgchess01"
+    },
+    {
+        "name": "GM Jingyao Tin",
+        "ranking": "164",
+        "rating": "2601",
+        "player_page_url": "https://www.chess.com/players/jingyao-tin",
+        "chesscom_profile_url": "https://www.chess.com/member/tjychess",
+        "chesscom_username": "tjychess"
+    },
+    {
+        "name": "GM Victor Bologan",
+        "ranking": "164",
+        "rating": "2601",
+        "player_page_url": "https://www.chess.com/players/victor-bologan",
+        "chesscom_profile_url": "https://www.chess.com/member/newbornnow",
+        "chesscom_username": "newbornnow"
+    },
+    {
+        "name": "GM Niclas Huschenbeth",
+        "ranking": "164",
+        "rating": "2601",
+        "player_page_url": "https://www.chess.com/players/niclas-huschenbeth",
+        "chesscom_profile_url": "https://www.chess.com/member/gm_huschenbeth",
+        "chesscom_username": "gm_huschenbeth"
+    },
+    {
+        "name": "GM Oleksandr Bortnyk",
+        "ranking": "164",
+        "rating": "2601",
+        "player_page_url": "https://www.chess.com/players/oleksandr-bortnyk",
+        "chesscom_profile_url": "https://www.chess.com/member/oleksandr_bortnyk",
+        "chesscom_username": "oleksandr_bortnyk"
+    },
+    {
+        "name": "GM Mateusz Bartel",
+        "ranking": "164",
+        "rating": "2601",
+        "player_page_url": "https://www.chess.com/players/mateusz-bartel",
+        "chesscom_profile_url": "https://www.chess.com/member/matibar",
+        "chesscom_username": "matibar"
+    },
+    {
+        "name": "GM Jergus Pechac",
+        "ranking": "169",
+        "rating": "2600",
+        "player_page_url": "https://www.chess.com/players/jergus-pechac",
+        "chesscom_profile_url": null,
+        "chesscom_username": null
+    },
+    {
+        "name": "GM Baadur Jobava",
+        "ranking": "169",
+        "rating": "2600",
+        "player_page_url": "https://www.chess.com/players/baadur-jobava",
+        "chesscom_profile_url": "https://www.chess.com/member/exoticprincess",
+        "chesscom_username": "exoticprincess"
+    },
+    {
+        "name": "GM Zhou Weiqi",
+        "ranking": "169",
+        "rating": "2600",
+        "player_page_url": "https://www.chess.com/players/zhou-weiqi",
+        "chesscom_profile_url": "https://www.chess.com/member/rickyzhou",
+        "chesscom_username": "rickyzhou"
+    },
+    {
+        "name": "GM Emil Sutovsky",
+        "ranking": "172",
+        "rating": "2599",
+        "player_page_url": "https://www.chess.com/players/emil-sutovsky",
+        "chesscom_profile_url": "https://www.chess.com/member/vzmz",
+        "chesscom_username": "vzmz"
+    },
+    {
+        "name": "GM Evgeny Romanov",
+        "ranking": "172",
+        "rating": "2599",
+        "player_page_url": "https://www.chess.com/players/evgeny-romanov",
+        "chesscom_profile_url": "https://www.chess.com/member/evgenyromanov",
+        "chesscom_username": "evgenyromanov"
+    },
+    {
+        "name": "GM Alexander Areshchenko",
+        "ranking": "174",
+        "rating": "2598",
+        "player_page_url": "https://www.chess.com/players/alexander-areshchenko",
+        "chesscom_profile_url": "https://www.chess.com/member/copperbrain",
+        "chesscom_username": "copperbrain"
+    },
+    {
+        "name": "GM Narayanan S L",
+        "ranking": "174",
+        "rating": "2598",
+        "player_page_url": "https://www.chess.com/players/narayanan-s-l",
+        "chesscom_profile_url": "https://www.chess.com/member/indianlad",
+        "chesscom_username": "indianlad"
+    },
+    {
+        "name": "GM Narayanan S L",
+        "ranking": "174",
+        "rating": "2598",
+        "player_page_url": "https://www.chess.com/players/narayanan-s-l",
+        "chesscom_profile_url": "https://www.chess.com/member/indianlad",
+        "chesscom_username": "indianlad"
+    },
+    {
+        "name": "GM Tuan Minh Le",
+        "ranking": "174",
+        "rating": "2598",
+        "player_page_url": "https://www.chess.com/players/tuan-minh-le",
+        "chesscom_profile_url": "https://www.chess.com/member/wonderfultime",
+        "chesscom_username": "wonderfultime"
+    },
+    {
+        "name": "GM Jorge Cori",
+        "ranking": "178",
+        "rating": "2597",
+        "player_page_url": "https://www.chess.com/players/jorge-cori",
+        "chesscom_profile_url": "https://www.chess.com/member/machupichu10",
+        "chesscom_username": "machupichu10"
+    },
+    {
+        "name": "GM Cristobal Henriquez Villagra",
+        "ranking": "178",
+        "rating": "2597",
+        "player_page_url": "https://www.chess.com/players/cristobal-henriquez-villagra",
+        "chesscom_profile_url": "https://www.chess.com/member/hvillagra",
+        "chesscom_username": "hvillagra"
+    },
+    {
+        "name": "GM Jules Moussard",
+        "ranking": "178",
+        "rating": "2597",
+        "player_page_url": "https://www.chess.com/players/jules-moussard",
+        "chesscom_profile_url": null,
+        "chesscom_username": null
+    },
+    {
+        "name": "GM Tomi Nyback",
+        "ranking": "181",
+        "rating": "2596",
+        "player_page_url": "https://www.chess.com/players/tomi-nyback",
+        "chesscom_profile_url": "https://www.chess.com/member/sumopork",
+        "chesscom_username": "sumopork"
+    },
+    {
+        "name": "GM Bobby Cheng",
+        "ranking": "181",
+        "rating": "2596",
+        "player_page_url": "https://www.chess.com/players/bobby-cheng",
+        "chesscom_profile_url": "https://www.chess.com/member/slackadaisacal",
+        "chesscom_username": "slackadaisacal"
+    },
+    {
+        "name": "GM David Paravyan",
+        "ranking": "181",
+        "rating": "2596",
+        "player_page_url": "https://www.chess.com/players/david-paravyan",
+        "chesscom_profile_url": "https://www.chess.com/member/dropstonedp",
+        "chesscom_username": "dropstonedp"
+    },
+    {
+        "name": "GM Georg Meier",
+        "ranking": "181",
+        "rating": "2596",
+        "player_page_url": "https://www.chess.com/players/georg-meier",
+        "chesscom_profile_url": "https://www.chess.com/member/georgmeier",
+        "chesscom_username": "georgmeier"
+    },
+    {
+        "name": "GM Miguel Santos Ruiz",
+        "ranking": "181",
+        "rating": "2596",
+        "player_page_url": "https://www.chess.com/players/miguel-santos-ruiz",
+        "chesscom_profile_url": "https://www.chess.com/member/miguelito",
+        "chesscom_username": "miguelito"
+    },
+    {
+        "name": "GM Rafael Leitao",
+        "ranking": "181",
+        "rating": "2596",
+        "player_page_url": "https://www.chess.com/players/rafael-leitao",
+        "chesscom_profile_url": "https://www.chess.com/member/gmrafpig",
+        "chesscom_username": "gmrafpig"
+    },
+    {
+        "name": "GM Vladimir Akopian",
+        "ranking": "187",
+        "rating": "2595",
+        "player_page_url": "https://www.chess.com/players/vladimir-akopian",
+        "chesscom_profile_url": "https://www.chess.com/member/gmvaleduser",
+        "chesscom_username": "gmvaleduser"
+    },
+    {
+        "name": "GM Alexander Motylev",
+        "ranking": "187",
+        "rating": "2595",
+        "player_page_url": "https://www.chess.com/players/alexander-motylev",
+        "chesscom_profile_url": "https://www.chess.com/member/almo64",
+        "chesscom_username": "almo64"
+    },
+    {
+        "name": "GM Miguel Illescas Cordoba",
+        "ranking": "189",
+        "rating": "2594",
+        "player_page_url": "https://www.chess.com/players/miguel-illescas-cordoba",
+        "chesscom_profile_url": "https://www.chess.com/member/dearmike",
+        "chesscom_username": "dearmike"
+    },
+    {
+        "name": "GM David Baramidze",
+        "ranking": "189",
+        "rating": "2594",
+        "player_page_url": "https://www.chess.com/players/david-baramidze",
+        "chesscom_profile_url": "https://www.chess.com/member/davidbaramidze",
+        "chesscom_username": "davidbaramidze"
+    },
+    {
+        "name": "GM Ante Brkic",
+        "ranking": "192",
+        "rating": "2593",
+        "player_page_url": "https://www.chess.com/players/ante-brkic",
+        "chesscom_profile_url": "https://www.chess.com/member/slavonac1988",
+        "chesscom_username": "slavonac1988"
+    },
+    {
+        "name": "GM Ivan Salgado Lopez",
+        "ranking": "192",
+        "rating": "2593",
+        "player_page_url": "https://www.chess.com/players/ivan-salgado-lopez",
+        "chesscom_profile_url": "https://www.chess.com/member/salgadochess91",
+        "chesscom_username": "salgadochess91"
+    },
+    {
+        "name": "GM Laurent Fressinet",
+        "ranking": "192",
+        "rating": "2593",
+        "player_page_url": "https://www.chess.com/players/laurent-fressinet",
+        "chesscom_profile_url": "https://www.chess.com/member/zlatan56",
+        "chesscom_username": "zlatan56"
+    },
+    {
+        "name": "GM Jan Gustafsson",
+        "ranking": "195",
+        "rating": "2591",
+        "player_page_url": "https://www.chess.com/players/jan-gustafsson",
+        "chesscom_profile_url": "https://www.chess.com/member/janistantv",
+        "chesscom_username": "janistantv"
+    },
+    {
+        "name": "GM Dragan Solak",
+        "ranking": "195",
+        "rating": "2591",
+        "player_page_url": "https://www.chess.com/players/dragan-solak",
+        "chesscom_profile_url": "https://www.chess.com/member/dragansolak",
+        "chesscom_username": "dragansolak"
+    },
+    {
+        "name": "GM Benjamin Bok",
+        "ranking": "195",
+        "rating": "2591",
+        "player_page_url": "https://www.chess.com/players/benjamin-bok",
+        "chesscom_profile_url": "https://www.chess.com/member/gmbenjaminbok",
+        "chesscom_username": "gmbenjaminbok"
+    },
+    {
+        "name": "GM Aleksey Dreev",
+        "ranking": "198",
+        "rating": "2590",
+        "player_page_url": "https://www.chess.com/players/aleksey-dreev",
+        "chesscom_profile_url": "https://www.chess.com/member/igrok3069",
+        "chesscom_username": "igrok3069"
+    },
+    {
+        "name": "GM Ivan Sokolov",
+        "ranking": "198",
+        "rating": "2590",
+        "player_page_url": "https://www.chess.com/players/ivan-sokolov",
+        "chesscom_profile_url": "https://www.chess.com/member/vegasicilia",
+        "chesscom_username": "vegasicilia"
+    },
+    {
+        "name": "GM Fabian Doettling",
+        "ranking": "200",
+        "rating": "2589",
+        "player_page_url": "https://www.chess.com/players/fabian-doettling",
+        "chesscom_profile_url": null,
+        "chesscom_username": null
+    },
+    {
+        "name": "GM Christopher Yoo",
+        "ranking": "201",
+        "rating": "2588",
+        "player_page_url": "https://www.chess.com/players/christopher-yoo",
+        "chesscom_profile_url": "https://www.chess.com/member/christopheryoo",
+        "chesscom_username": "christopheryoo"
+    }
+]
