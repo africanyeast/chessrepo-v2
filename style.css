@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+:root {
+    --primary-color: #13202c;
+    --secondary-color: #f8f9fa;
+    --text-color: #212529;
+    --text-inverse: #f8f9fa;
+    --background-light: #f8f9fa;
+    --background-dark: #13202c;
+    --header-color: #13202c;
+    --border-color: #e9ecef;
+    --highlight-color: #dc3545;
+    --nav-active: #dc3545;
+    --nav-link-hover: rgba(0,0,0,0.05);
+    --event-header: #f8f9fa;
+    --active-game: rgba(0,0,0,0.05);
+    --board-color: #a8aba8;
+    --c-last-move: rgba(144, 238, 144, 0.25);
+    --c-lpv-bg: none;
+    --c-lpv-bg-movelist: none;
+    --c-lpv-bg-controls: none;
+    --c-lpv-bg-variation: none;
+    --c-lpv-side-border: #e9ecef;
+    --c-lpv-border: #e9ecef;
+    --c-lpv-move-hover: #6d6c6b;
+    --c-lpv-accent: #2d333b;
+    --c-lpv-accent-over: #fff;
+    --c-lpv-font-shy: #666;
+    --c-lpv-font: #fff;
+    --c-lpv-bg-pane: #2d333b;
+    --c-lpv-bg-controls: #2d333b;
+}
+
+/* Dark mode colors */
+.dark-mode {
+    --primary-color: #f8f9fa;
+    --secondary-color: #212529;
+    --text-color: #f8f9fa;
+    --text-inverse: #212529;
+    --background-light: #212529;
+    --background-dark: #0d1117;
+    --header-color: #0d1117;
+    --border-color: #30363d;
+    --highlight-color: #dc3545;
+    --nav-link-hover: #2d333b;
+    --event-header: #2d333b;
+    --active-game: #363f4a;
+    --c-lpv-move-hover: #2d333b;
+    --c-lpv-accent-over: #fff;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.navbar {
+    background-color: var(--header-color) !important;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    color: #dc3545;
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.nav-btn button {
+    background-color: rgba(255,255,255,0.07);
+    padding: 5px 10px;
+}
+
+.search-button {
+    color: white;
+    border: none;
+}
+
+.menu-button {
+    color: white;
+    border: none;
+}
+
+.filter-nav {
+    background-color: var(--background-light);
+    border-bottom: 1px solid var(--border-color);
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.filter-nav .nav-link {
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 0;
+    padding: 10px 20px;
+    text-transform: capitalize;
+}
+
+.filter-nav .nav-link:hover {
+    background-color: var(--nav-link-hover);
+}
+
+.filter-nav .nav-link.active, filter-nav .nav-link.active:hover {
+    background-color: var(--nav-active);
+    color: white;
+}
+
+.date-navigation {
+    background-color: var(--background-light);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.date-nav-button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+
+.current-date {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.event-header {
+    padding: 8px 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background-color: var(--event-header);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.game-row {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.85rem;
+}
+
+.game-row:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.dark-mode .game-row:hover {
+    background-color: rgba(255,255,255,0.05);
+}
+
+.game-row.active {
+    background-color: var(--active-game);
+}
+
+.game-time {
+    color: #777;
+    width: 40px;
+    text-align: center;
+    display: none;
+}
+
+.game-result {
+    font-weight: 500;
+    padding: 0 5px;
+}
+
+@media (max-width: 767px) {
+    .game-row {
+        font-size: 0.85rem;
+    }
+}
+
+/* Chess board section - fixed position when scrolling */
+.chess-board-section {
+    background-color: var(--background-light);
+    border-left: 1px solid var(--border-color);
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+}
+
+.chess-board-header {
+    padding: 20px 20px 0;
+    /* border-bottom: 1px solid var(--border-color); */
+    font-weight: 600;
+}
+
+.chess-board-container {
+    padding: 0 20px;
+}
+
+.chess-board-placeholder {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.game-metadata {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+}
+
+.metadata-item {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.metadata-label {
+    width: 100px;
+    font-weight: 500;
+}
+
+.game-action-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 0 0 15px;
+}
+
+.action-button {
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.dark-mode .action-button {
+    background-color: var(--background-dark);
+}
+
+.move-history {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    height: 400px;
+    overflow-y: auto;
+}
+
+.move {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.move-number {
+    width: 30px;
+    font-weight: 500;
+}
+
+.board-container {
+    display: flex;
+    
+}
+
+@media (max-width: 991px) {
+    .board-container {
+        flex-direction: column;
+    }
+    
+    .move-history {
+        height: 200px;
+        width: 100%;
+    }
+}
+
+.dark-mode .filter-nav,
+.dark-mode .date-navigation,
+.dark-mode .chess-board-section,
+.dark-mode .chess-board-header,
+.dark-mode .move-history {
+    background-color: var(--background-dark);
+}

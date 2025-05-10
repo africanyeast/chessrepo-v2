@@ -10,7 +10,8 @@ from django.db import IntegrityError
 import chess
 import chess.pgn
 from repo.utils.chesscom.api import CHESSCOM_API
-from repo.utils.pgn import pgn_to_dict, extract_games_from_pgn_string
+from repo.utils.pgn import extract_games_from_pgn_string
+from repo.utils.save import save_game_data
 from repo.models import Game
 from decouple import config
 
@@ -50,6 +51,9 @@ class Command(BaseCommand):
 
         chesscom_api = CHESSCOM_API()
         source = "chesscom"
+        games_newly_saved_count = 0
+        games_skipped_count = 0
+        games_error_count = 0
 
         for username in usernames:
             user_pgn = chesscom_api.get_player_games_current_month_pgn(username) # Assumes API takes only username
@@ -60,14 +64,17 @@ class Command(BaseCommand):
 
             games_from_pgn = extract_games_from_pgn_string(user_pgn, source)
 
-            for game_dict in games_from_pgn:
-                    try:
-                        Game.objects.create(**game_dict)
-                    except IntegrityError: # Should be rare if hash check is robust
-                        self.stdout.write(self.style.WARNING(f"  IntegrityError: Game with hash {game_dict.get("pgn_hash")} might already exist (race condition?) or other constraint violation."))
-                    except Exception as e:
-                        self.stdout.write(self.style.ERROR(f"  Error saving game for {username}: {e} - Data: {game_dict}"))
-            
+            for game_data in games_from_pgn:
+                    status = save_game_data(game_data, self.stdout, f"chess.com user {username}")
+                    if status == 'created':
+                        games_newly_saved_count += 1
+                    elif status == 'skipped':
+                        games_skipped_count += 1
+                    elif status == 'error':
+                        games_error_count += 1
             #time.sleep(0.5) # Be polite to the API
 
-        self.stdout.write(self.style.SUCCESS(f"\nFinished run."))
+        self.stdout.write(self.style.SUCCESS(
+            f"\nFinished chess.com run. "
+            f"Newly saved: {games_newly_saved_count}, Skipped: {games_skipped_count}, Errors: {games_error_count}."
+        ))
