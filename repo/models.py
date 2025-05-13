@@ -23,8 +23,15 @@ class ChessDateField(models.DateField):
         return super().to_python(value)
 
 class Game(models.Model):
-    white = models.CharField(max_length=255, blank=True, null=True)
-    black = models.CharField(max_length=255, blank=True, null=True)
+    # white = models.CharField(max_length=255, blank=True, null=True)
+    # black = models.CharField(max_length=255, blank=True, null=True)
+    white = models.ForeignKey('Player', on_delete=models.SET_NULL, related_name='white_games', null=True, blank=True)
+    black = models.ForeignKey('Player', on_delete=models.SET_NULL, related_name='black_games', null=True, blank=True)
+    
+    # keep chesscom usernames as backup / fallback
+    white_username = models.CharField(max_length=255, blank=True, null=True)
+    black_username = models.CharField(max_length=255, blank=True, null=True)
+    
     result = models.CharField(max_length=10, blank=True, null=True)
     opening = models.CharField(max_length=255, blank=True, null=True)
     eco = models.CharField(max_length=10, blank=True, null=True)
@@ -45,6 +52,8 @@ class Game(models.Model):
     endtime = models.TimeField(blank=True, null=True)
     
     timecontrol = models.CharField(max_length=100, blank=True, null=True)
+    # Blitz, Rapid, Bullet, etc.
+    format = models.CharField(max_length=20, blank=True, null=True)
 
     # Variant - represents the game variant (e.g., Standard, Fischer Random Chess, etc.)
     variant = models.CharField(max_length=100, blank=True, null=True)
@@ -52,7 +61,7 @@ class Game(models.Model):
     link = models.URLField(max_length=500, blank=True, null=True, unique=False) 
     pgn = models.TextField()
     pgn_hash = models.CharField(max_length=64, unique=True, db_index=True)
-    source = models.CharField(max_length=50, db_index=True)
+    source = models.CharField(max_length=20, db_index=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -61,24 +70,34 @@ class Game(models.Model):
         return f"{self.white or 'N/A'} vs {self.black or 'N/A'} - {self.date or 'Unknown Date'}"
 
     class Meta:
-        ordering = ['-date', '-id'] # Order by date descending, then by ID
+        ordering = ['-date', '-endtime']
+        db_table = 'games'
+        verbose_name = 'Game'
+        verbose_name_plural = 'Games'
+        indexes = [
+            models.Index(fields=['date']),
+            models.Index(fields=['date', 'endtime']),
+            models.Index(fields=['white']),
+            models.Index(fields=['black']),
+            models.Index(fields=['tournament']),
+            models.Index(fields=['tournament', 'endtime']),
+        ]
 
 
-# class Player(models.Model):
-#     full_name = models.CharField(max_length=255, blank=True, null=True)
-#     fide_id = models.CharField(max_length=50, unique=True, blank=True, null=True, help_text="FIDE ID of the player")
-#     country = models.CharField(max_length=100, blank=True, null=True, help_text="Player's country (e.g., FIDE federation)")
-#     title = models.CharField(max_length=10, blank=True, null=True, help_text="Player's FIDE title (e.g., GM, IM, WGM)")
+class Player(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    fide_id = models.CharField(max_length=50, unique=True, blank=True, null=True)
+    country = models.CharField(max_length=100, blank=True, null=True)
+    title = models.CharField(max_length=10, blank=True, null=True)
+    chesscom_username = models.CharField(max_length=100, unique=True, blank=True, null=True)
+    lichess_username = models.CharField(max_length=100, unique=True, blank=True, null=True)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name or self.username
     
-#     fide_standard_rating = models.IntegerField(blank=True, null=True)
-#     fide_rapid_rating = models.IntegerField(blank=True, null=True)
-#     fide_blitz_rating = models.IntegerField(blank=True, null=True)
-    
-#     chesscom_username = models.CharField(max_length=100, unique=True, blank=True, null=True)
-#     lichess_username = models.CharField(max_length=100, unique=True, blank=True, null=True)
-
-#     def __str__(self):
-#         return self.full_name or self.chesscom_username or self.lichess_username or f"Player {self.id}"
-
-#     class Meta:
-#         ordering = ['full_name']
+    class Meta:
+        ordering = ['name']
+        db_table = 'players'
+        verbose_name = 'Player'
+        verbose_name_plural = 'Players'

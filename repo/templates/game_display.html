@@ -1,0 +1,57 @@
+<div class="game-view-section" id="gameViewDisplay">
+    <div class="col-md-10 mx-auto">
+        <div class="game-view-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="mb-1" id="gamePlayerNames">Select a game</h6>
+                    <div class="small text-muted text-capitalize" id="gameTournamentName">&nbsp;</div>
+                </div>
+                <span class="badge bg-secondary" id="gameResult">&nbsp;</span>
+            </div>
+        </div>
+        <div class="game-view-info mb-4">
+            <div class="game-metadata">
+                <div class="metadata-item">
+                    <div class="metadata-label">Opening:</div>
+                    <div id="gameOpening">&nbsp;</div>
+                </div>
+                <div class="metadata-item">
+                    <div class="metadata-label">Site:</div>
+                    <div id="gameSite">&nbsp;</div>
+                </div>
+            </div>
+            <!-- <div class="game-action-buttons">
+                <button class="action-button" id="shareGameButton" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy game link">
+                    Share
+                </button>
+                <a href="#" class="action-button" id="analyzeGameButton" target="_blank" rel="noopener noreferrer">
+                    Analyze
+                </a>
+            </div> -->
+        </div>
+        <div class="chess-board-container">
+            <div class="board-container col-md-12">
+                <div class="game-position" id="gamePgnPosition" data-pgn="">
+                    <p class="text-center p-3 text-muted">Click a game on the left to view.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modern blurred skeleton loader (hidden by default) -->
+        <div id="gameLoader" class="game-loader col-md-12" style="display: none;">
+            <div class="skeleton-loader">
+                <div class="skeleton-header">
+                    <div class="skeleton-title"></div>
+                    <div class="skeleton-badge"></div>
+                </div>
+                <div class="skeleton-info">
+                    <div class="skeleton-metadata"></div>
+                    <div class="skeleton-metadata"></div>
+                </div>
+                <div class="skeleton-board">
+                    <div class="skeleton-pulse"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

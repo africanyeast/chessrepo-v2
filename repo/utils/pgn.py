@@ -3,6 +3,9 @@ import chess
 import chess.pgn
 import hashlib
 import io
+from django.core.cache import cache
+from repo.utils.save import get_or_create_chesscom_player, get_or_create_lichess_player
+
 
 def extract_opening_from_chesscom_ecourl(eco_url: str | None) -> str:
         """Extracts opening name from ECOUrl."""
@@ -19,22 +22,72 @@ def extract_opening_from_chesscom_ecourl(eco_url: str | None) -> str:
 def generate_pgn_hash(pgn_string: str) -> str:
         return hashlib.sha256(pgn_string.encode('utf-8')).hexdigest()
 
-def pgn_to_dict(game: chess.pgn.Game, source: str) -> dict:
+def determine_game_format(pgn_string: str) -> str | None:
+        """
+        Determines the game format (bullet, blitz, rapid, classical) based on the clock annotation
+        in the first move of the PGN.
+        
+        Returns:
+            str | None: The game format or None if no clock annotation is found
+        """
+        # Look for the first clock annotation in the PGN
+        clock_match = re.search(r'\[%clk\s+(\d+):(\d+):(\d+)(?:\.\d+)?\]', pgn_string)
+        
+        if not clock_match:
+            return None
+            
+        # Extract hours, minutes, seconds
+        hours = int(clock_match.group(1))
+        minutes = int(clock_match.group(2))
+        seconds = int(clock_match.group(3))
+        
+        # Calculate total time in minutes
+        total_minutes = hours * 60 + minutes + (seconds / 60)
+        
+        # Determine format based on time
+        if total_minutes < 3:
+            return "bullet"
+        elif total_minutes < 10:
+            return "blitz"
+        elif total_minutes <= 15:
+            return "rapid"
+        else:
+            return "classical"
+
+# check if a pgn_string is already potentially in the database (at least cached in redis)
+# if pgn hash is a key in the redis cache, return False
+# if pgn hash is not a key in the redis cache, add it to the redis cache and return True
+def is_new_game(pgn_string: str) -> bool:
+    pgn_hash = generate_pgn_hash(pgn_string)
+    if cache.get(pgn_hash):
+        return False
+    cache.set(pgn_hash, True, timeout=60 * 60 * 24 * 32)  # 32 days TTL
+    return pgn_hash
+
+def pgn_to_dict(pgn_string: str, source: str, pgn_hash: str) -> dict:
         """Converts a chess.pgn.Game object to a standardized dictionary."""
+        game = chess.pgn.read_game(io.StringIO(pgn_string))
         headers = game.headers
-        pgn_string = str(game)
+        # Determine game format
+        game_format = determine_game_format(pgn_string)
         
         if source=="chesscom":
+            
+            white_username = headers.get("White", "")
+            black_username = headers.get("Black", "")
+            white_player = get_or_create_chesscom_player(white_username)
+            black_player = get_or_create_chesscom_player(black_username)
+
             if headers.get("Opening"):
                 opening_name = headers.get("Opening", "")
             elif headers.get("ECOUrl"):
                 opening_name = extract_opening_from_chesscom_ecourl(headers.get("ECOUrl"))
             else:
                 opening_name = ""
-            # now let's implement extracting tournament name from the tournament headers
+            # extracting tournament name from the tournament headers
             # an example: https://www.chess.com/tournament/live/late-titled-tuesday-blitz-may-06-2025-5632457
-            # the tournament name is "Late-Titled Tuesday Blitz" but we have to remove the date, url, and id
-            # But if tournament is not titled tuesday or freestyle friday, then we can just use whatever is passed in the headers directly
+            # the tournament name is "Late-Titled Tuesday Blitz" remove the date, url, and id
+            # But if tournament is not titled tuesday or freestyle friday, use whatever is passed in the headers directly
             tournament_name = ""
             if headers.get("Tournament"):
                 tournament_name = headers.get("Tournament", "")
@@ -42,7 +95,7 @@ def pgn_to_dict(game: chess.pgn.Game, source: str) -> dict:
                 if "chess.com/tournament" in tournament_name:
                     tournament_name = tournament_name.split("/")[-1]
                 # Only apply regex for Titled Tuesday and Freestyle Friday tournaments
-                if "titled-tuesday" in tournament_name.lower() or "freestyle-friday" in tournament_name.lower():
+                if "titled-tuesday" in tournament_name.lower() or "freestyle-friday" or "bullet-brawl" in tournament_name.lower():
                     tournament_name = tournament_name.replace("-", " ")
                     # Remove date patterns (like may-06-2025 or 2025-05-06)
                     tournament_name = re.sub(r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[- ]\d{2}[- ]\d{4}', '', tournament_name, flags=re.IGNORECASE)
@@ -51,11 +104,15 @@ def pgn_to_dict(game: chess.pgn.Game, source: str) -> dict:
                     tournament_name = re.sub(r'\d+', '', tournament_name)
                     # Clean up extra spaces and trim
                     tournament_name = re.sub(r'\s+', ' ', tournament_name).strip()
+            else:
+                tournament_name = headers.get("Event", "") # Default value to event name for non-titled tournaments
 
             
             return {
-                "white": headers.get("White", ""),
-                "black": headers.get("Black", ""),
+                "white": white_player,
+                "black": black_player,
+                "white_username": white_username,
+                "black_username": black_username,
                 "result": headers.get("Result", ""),
                 "opening": opening_name,
                 "eco": headers.get("ECO", ""),
@@ -71,8 +128,9 @@ def pgn_to_dict(game: chess.pgn.Game, source: str) -> dict:
                 "timecontrol": headers.get("TimeControl", ""),
                 "variant": headers.get("Variant", ""),
                 "link": headers.get("Link", ""),
+                "format": game_format,
                 "pgn": pgn_string,
-                "pgn_hash": generate_pgn_hash(pgn_string),
+                "pgn_hash": pgn_hash,
                 "source": source,
             }
         elif source=="lichess":
@@ -102,9 +160,16 @@ def pgn_to_dict(game: chess.pgn.Game, source: str) -> dict:
             # final_model_endtime is simply the cleaned_utc_time
             final_model_endtime = cleaned_utc_time
 
+            white_fide_id = headers.get("WhiteFideId", "")
+            black_fide_id = headers.get("BlackFideId", "")
+            white_player = get_or_create_lichess_player(white_fide_id)
+            black_player = get_or_create_lichess_player(black_fide_id)
+
             return {
-                "white": headers.get("White", ""),
-                "black": headers.get("Black", ""),
+                "white": white_player,
+                "black": black_player,
+                "white_username": headers.get("White", ""),
+                "black_username": headers.get("Black", ""),
                 "result": headers.get("Result", ""),
                 "opening": headers.get("Opening", ""),
                 "eco": headers.get("ECO", ""),
@@ -119,8 +184,9 @@ def pgn_to_dict(game: chess.pgn.Game, source: str) -> dict:
                 "endtime": final_model_endtime,
                 "variant": headers.get("Variant", ""),
                 "link": headers.get("GameUrl", ""),
+                "format": game_format,
                 "pgn": pgn_string,
-                "pgn_hash": generate_pgn_hash(pgn_string),
+                "pgn_hash": pgn_hash,
                 "source": source,
             }
 
@@ -141,7 +207,12 @@ def extract_games_from_pgn_string(pgn_string: str, source: str) -> list[dict]:
                 game = chess.pgn.read_game(pgn_io)
                 if game is None:
                     break
-                extracted_games.append(pgn_to_dict(game, source))
+                pgn_string = str(game)
+                pgn_hash = is_new_game(pgn_string)
+                # hopefully this reduces the overhead expecially with the API calls and database creation of new players in pgn_dict
+                if pgn_hash is False:
+                    continue # skip this game if it's already in the database, we don't want to duplicate games
+                extracted_games.append(pgn_to_dict(pgn_string, source, pgn_hash))
             except Exception as e:
                 #print(f"Error reading a game from PGN: {e}")
                 continue 

@@ -38,10 +38,10 @@ class Command(BaseCommand):
             return
             
         if not round_ids:
-            self.stdout.write(self.style.NOTICE("No finished Tier 5 rounds found in Lichess top broadcasts on this run."))
+            self.stdout.write(self.style.NOTICE("No finished rounds found in Lichess top broadcasts on this run."))
             return
 
-        self.stdout.write(f"Found {len(round_ids)} finished Tier 5 Lichess rounds to process.")
+        self.stdout.write(f"Found {len(round_ids)} finished Lichess rounds to process.")
 
         for round_id in round_ids:
             try:

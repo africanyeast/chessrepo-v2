@@ -1,0 +1,22 @@
+<div class="tournament-container" data-total-games="{{ tournament.games|length }}">
+    <div class="event-header" onclick="toggleTournament(this)">
+        <span class="tournament-name">{{ tournament.name }} <span class="game-counter">(<span class="game-count">{{ tournament.games|length }}</span>)</span></span>
+        <span class="toggle-icon"><i class="bi bi-chevron-up"></i></span>
+    </div>
+    <div class="games-container">
+        {% for game_obj in tournament.games|slice:":10" %}
+            {% include "game_row.html" with game=game_obj %}
+        {% endfor %}
+        
+        {% if tournament.games|length > 10 %}
+            <div class="show-more-container">
+                <button class="show-more-btn" onclick="showMoreGames(this)" data-offset="10">Show More <i class="bi bi-chevron-down"></i></button>
+            </div>
+            <div class="hidden-games" style="display: none;">
+                {% for game_obj in tournament.games|slice:"10:" %}
+                    {% include "game_row.html" with game=game_obj %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>

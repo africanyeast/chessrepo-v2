@@ -1,0 +1,23 @@
+<div class="game-row game-row-interactive"
+     data-game-id="{{ game.id }}" 
+     data-format="{{ game.format|default:'unknown' }}" 
+     data-variant="{{ game.variant|default:'' }}"
+     style="cursor: pointer;">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="game-time">{{ game.endtime|time:"H:i"|default:"--" }}</div>
+        <div class="flex-grow-1">
+            {% if game.white %}
+                {{ game.white.name|default:"N/A" }}
+            {% else %}
+                {{ game.white_username|default:"N/A" }}
+            {% endif %}
+            -
+            {% if game.black %}
+                {{ game.black.name|default:"N/A" }}
+            {% else %}
+                {{ game.black_username|default:"N/A" }}
+            {% endif %}
+        </div>
+        <div class="game-result">{{ game.result|default:"N/A" }}</div>
+    </div>
+</div>

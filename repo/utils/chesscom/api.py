@@ -44,3 +44,23 @@ class CHESSCOM_API:
         
         return None
 
+    def get_player_profile(self, username: str) -> dict | None:
+        """
+        Retrieves the profile data for a given player from Chess.com API.
+        Args:
+            username: The Chess.com username of the player.
+        Returns:
+            A dictionary containing the player's profile data, or None if an error occurs.
+        """
+        url = f"{self.BASE_URL}/{username}"
+        try:
+            response = requests.get(url, headers=self.HEADERS)
+            response.raise_for_status()
+            if response.status_code == 200:
+                return response.json()
+            else:
+                print(f"Unexpected status code {response.status_code} while fetching profile for {username}")
+                return None
+        except requests.exceptions.HTTPError as http_err:
+            print(f"HTTP error occurred while fetching profile for {username}: {http_err}")
+

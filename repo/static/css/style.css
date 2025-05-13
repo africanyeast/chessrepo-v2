@@ -1,0 +1,488 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+:root {
+    --primary-color: #13202c;
+    --secondary-color: #f8f9fa;
+    --text-color: #212529;
+    --text-inverse: #f8f9fa;
+    --background-light: #f8f9fa;
+    --background-right-light: #fff;
+    --background-dark: #13202c;
+    --background-hover: #e9ecef;
+    --header-color: #13202c;
+    --border-color: #e9ecef;
+    --border-color-hover: #dee2e6;
+    --highlight-color: #dc3545;
+    --nav-active: #dc3545;
+    --nav-link-hover: rgba(0,0,0,0.05);
+    --event-header: #f8f9fa;
+    --active-game: rgba(0,0,0,0.05);
+    --text-muted: #777;
+    --board-color: #a8aba8;
+    --c-last-move: rgba(144, 238, 144, 0.25);
+    --c-lpv-bg: none;
+    --c-lpv-bg-movelist: none;
+    --c-lpv-bg-controls: none;
+    --c-lpv-bg-variation: none;
+    --c-lpv-side-border: #e9ecef;
+    --c-lpv-border: #e9ecef;
+    --c-lpv-move-hover: #6d6c6b;
+    --c-lpv-accent: #2d333b;
+    --c-lpv-accent-over: #fff;
+    --c-lpv-font-shy: #666;
+    --c-lpv-font: #fff;
+    --c-lpv-bg-pane: #2d333b;
+    --c-lpv-bg-controls: #2d333b;
+    --skeleton-base: #f0f0f0;
+    --skeleton-highlight: #e0e0e0;
+    --skeleton-board: #f5f5f5;
+    --skeleton-pulse: rgba(255, 255, 255, 0.2);
+}
+
+/* Dark mode colors */
+.dark-mode {
+    --primary-color: #f8f9fa;
+    --secondary-color: #212529;
+    --text-color: #f8f9fa;
+    --text-inverse: #212529;
+    --background-light: #212529;
+    --background-dark: #0d1117;
+    --background-right-dark: #0d1117;
+    --header-color: #0d1117;
+    --border-color: #30363d;
+    --highlight-color: #dc3545;
+    --nav-link-hover: #2d333b;
+    --event-header: #2d333b;
+    --active-game: #363f4a;
+    --text-muted: #8b949e;
+    --c-lpv-move-hover: #2d333b;
+    --c-lpv-accent-over: #fff;
+    --skeleton-base: #30363d;
+    --skeleton-highlight: #2d333b;
+    --skeleton-board: #2d333b;
+    --skeleton-pulse: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.text-muted {
+    color: var(--text-muted)!important;
+}
+
+.navbar {
+    background-color: var(--header-color) !important;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.logo-icon {
+    color: #dc3545;
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.nav-btn button {
+    background-color: rgba(255,255,255,0.07);
+    padding: 5px 10px;
+}
+
+.nav-btn button small{
+    font-weight: 600;
+}
+
+.search-button {
+    color: white;
+    border: none;
+}
+
+.menu-button {
+    color: white;
+    border: none;
+}
+
+.filter-nav {
+    background-color: var(--background-light);
+    border-bottom: 1px solid var(--border-color);
+    overflow-x: auto;
+    white-space: nowrap;
+    /* display: flex;
+    justify-content: center; */
+}
+
+.filter-nav .nav-link {
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 0;
+    padding: 10px 20px;
+    text-transform: capitalize;
+}
+
+.filter-nav .nav-link:hover {
+    background-color: var(--nav-link-hover);
+}
+
+.filter-nav .nav-link.active, .filter-nav .nav-link.active:hover {
+    background-color: var(--nav-active);
+    color: white;
+}
+
+.date-navigation {
+    background-color: var(--background-light);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.date-nav-button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+
+.current-date {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+
+
+.events-container {
+    max-height: calc(100vh - 180px); /* Adjust 180px based on the actual combined height of your header, filter, and date navigation elements */
+    overflow-y: auto;
+}
+
+/* Tournament Display Styles */
+.event-header {
+    padding: 8px 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background-color: var(--event-header);
+    border-bottom: 1px solid var(--border-color);
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.tournament-container {
+    overflow: hidden;
+}
+
+.game-counter{
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-left: 2px;
+}
+
+.toggle-icon {
+    color: var(--text-color);
+    /* padding: 0 5px; */
+    font-size: 1rem;
+}
+
+
+.show-more-container {
+    display: flex;
+    justify-content: center;
+    padding: 0 0;
+    margin: 0 0;
+    width: 100%;
+}
+
+.show-more-btn {
+    background-color: var(--background-light);
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: var(--text-color);
+    width: 100%;
+}
+
+.show-more-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.hidden-games {
+    display: none;
+}
+
+
+
+
+.game-row {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.85rem;
+}
+
+.event-header:hover, .show-more-btn:hover, .game-row:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.dark-mode .event-header:hover, .dark-mode .show-more-btn:hover, .dark-mode .game-row:hover {
+    background-color: rgba(255,255,255,0.05);
+}
+
+.game-row.selected-game {
+    background-color: var(--active-game);
+}
+
+.game-time {
+    color: #777;
+    width: 40px;
+    text-align: center;
+    display: none;
+}
+
+.game-result {
+    font-weight: 400;
+    /* padding: 0 5px; */
+}
+
+.game-view-section {
+    background-color: var(--background-right-light);
+    border-left: 1px solid var(--border-color);
+    overflow-y: hidden;
+    position: relative !important;
+    min-height: 100%;
+}
+
+.dark-mode .game-view-section {
+    background-color: var(--background-right-dark);
+    background-color: var(--background-dark);
+}
+
+.game-view-header {
+    padding: 20px 20px 0;
+    /* border-bottom: 1px solid var(--border-color); */
+    font-weight: 600;
+}
+
+.game-view-header h6{
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.game-view-header .small{
+    font-size: 0.85rem;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.game-view-info, .chess-board-container {
+    padding: 0 20px;
+}
+
+.chess-board-placeholder {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.game-metadata {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+}
+
+.metadata-item {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.metadata-label {
+    width: 80px;
+    font-weight: 500;
+}
+
+.game-action-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 0 0 15px;
+}
+
+.action-button {
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.action-button:hover {
+    background-color: var(--background-hover);
+    border-color: var(--border-color-hover);
+    text-decoration: none;
+}
+
+.dark-mode .action-button {
+    background-color: var(--background-dark);
+}
+
+.move-history {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    height: 400px;
+    overflow-y: auto;
+}
+
+.move {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.move-number {
+    width: 30px;
+    font-weight: 500;
+}
+
+.board-container {
+    display: flex;
+    
+}
+
+.dark-mode .filter-nav,
+.dark-mode .date-navigation,
+.dark-mode .chess-board-section,
+.dark-mode .chess-board-header,
+.dark-mode .move-history {
+    background-color: var(--background-dark);
+}
+
+
+/* Modern Skeleton Loader Styles */
+.game-loader {
+    backdrop-filter: blur(4px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.skeleton-loader {
+    width: 100%;
+    padding: 20px 20px 0;
+    box-sizing: border-box;
+}
+
+.skeleton-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.skeleton-title {
+    height: 24px;
+    width: 70%;
+    background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-highlight) 50%, var(--skeleton-base) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+
+.skeleton-badge {
+    height: 20px;
+    width: 60px;
+    background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-highlight) 50%, var(--skeleton-base) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 12px;
+}
+
+.skeleton-info {
+    margin-bottom: 20px;
+}
+
+.skeleton-metadata {
+    height: 16px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-highlight) 50%, var(--skeleton-base) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.skeleton-board {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* Square aspect ratio */
+    background-color: var(--skeleton-board);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.skeleton-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--skeleton-pulse), transparent);
+    animation: pulse 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+
+
+/*mobile responsiveness*/
+@media (max-width: 767px) {
+    .filter-nav .nav-link {
+        padding: 10px 10px;
+        font-size: 0.85rem;
+    }
+    .game-row {
+        font-size: 0.85rem;
+    }
+    .game-view-header h6{
+        font-size: 0.9rem;
+        margin-top: 20px;
+    }
+    .game-view-header .small{
+        font-size: 0.8rem;
+        font-weight: 400;
+    }
+    .metadata-label {
+        font-size: 400;
+    }
+}

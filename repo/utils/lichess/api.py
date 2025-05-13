@@ -16,7 +16,7 @@ class LICHESS_API:
             return None
     
     def get_finished_rounds_from_top_broadcast(self, top_broadcast: dict) -> list:
-        # store the ids of finished rounds that are tier 5 or higher and active broadcasts from the top broadcast pag
+        # store the ids of finished rounds that are tier 1 or higher and active broadcasts from the top broadcast page
         finished_round_ids = []
         active_broadcasts = top_broadcast.get('active', [])
 
@@ -37,7 +37,7 @@ class LICHESS_API:
             is_round_finished = round_to_link_info.get('finished', False)
             round_id = round_to_link_info.get('id')
 
-            if tour_tier >= 5 and is_round_finished and round_id:
+            if tour_tier >= 1 and is_round_finished and round_id:
                 finished_round_ids.append(round_id)
                 
         
@@ -48,5 +48,13 @@ class LICHESS_API:
         response = requests.get(url, headers=self.HEADERS)
         if response.status_code == 200:
             return response.text
+        else:
+            return None
+
+    def get_player_fide_profile(self, fide_id: str) -> dict | None:
+        url = f"{self.BASE_URL}/fide/player/{fide_id}"
+        response = requests.get(url, headers=self.HEADERS)
+        if response.status_code == 200:
+            return response.json()
         else:
             return None
