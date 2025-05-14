@@ -1,19 +1,22 @@
 <div class="game-row game-row-interactive"
-     data-game-id="{{ game.id }}" 
+     data-game-id="{{ game.id }}"
      data-format="{{ game.format|default:'unknown' }}" 
      data-variant="{{ game.variant|default:'' }}"
+     data-player-pair="{{ game.player_pair }}"
      style="cursor: pointer;">
     <div class="d-flex justify-content-between align-items-center">
         <div class="game-time">{{ game.endtime|time:"H:i"|default:"--" }}</div>
-        <div class="flex-grow-1">
+        <div class="flex-grow-1 text-capitalize">
             {% if game.white %}
-                {{ game.white.name|default:"N/A" }}
+                {{game.white.title|default:""}}
+                {{ game.white.name|default:game.white_username|default:"N/A" }}
             {% else %}
                 {{ game.white_username|default:"N/A" }}
             {% endif %}
-            -
+            &nbsp;&nbsp;-&nbsp;&nbsp;
             {% if game.black %}
-                {{ game.black.name|default:"N/A" }}
+                {{game.black.title|default:""}}
+                {{ game.black.name|default:game.black_username|default:"N/A" }}
             {% else %}
                 {{ game.black_username|default:"N/A" }}
             {% endif %}

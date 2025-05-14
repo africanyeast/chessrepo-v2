@@ -1,22 +1,52 @@
 <div class="tournament-container" data-total-games="{{ tournament.games|length }}">
     <div class="event-header" onclick="toggleTournament(this)">
-        <span class="tournament-name">{{ tournament.name }} <span class="game-counter">(<span class="game-count">{{ tournament.games|length }}</span>)</span></span>
+        <span class="tournament-name">{{ tournament.name|truncatechars:50 }} <span class="game-count">({{ tournament.games|length }})</span></span>
         <span class="toggle-icon"><i class="bi bi-chevron-up"></i></span>
     </div>
     <div class="games-container">
-        {% for game_obj in tournament.games|slice:":10" %}
-            {% include "game_row.html" with game=game_obj %}
+        {% regroup tournament.games by player_pair as player_groups %}
+        
+        <!-- First display all player groups with multiple games -->
+        {% for group in player_groups %}
+            {% if group.list|length > 1 %}
+                <!-- Player group with multiple games -->
+                <div class="player-group-container" data-total-games="{{ group.list|length }}">
+                    <div class="player-group-header" onclick="togglePlayerGroup(this)">
+                        <span class="player-group-name">
+                            {% with first_game=group.list.0 %}
+                                {% if first_game.white %}
+                                    {{first_game.white.title|default:""}}
+                                    {{ first_game.white.name|default:first_game.white_username|default:"N/A" }}
+                                {% else %}
+                                    {{ first_game.white_username|default:"N/A" }}
+                                {% endif %}
+                                <span class="player-group-versus">&nbsp;vs&nbsp;</span>
+                                {% if first_game.black %}
+                                    {{first_game.black.title|default:""}}
+                                    {{ first_game.black.name|default:first_game.black_username|default:"N/A" }}
+                                {% else %}
+                                    {{ first_game.black_username|default:"N/A" }}
+                                {% endif %}
+                            {% endwith %}
+                            <span class="game-count">({{ group.list|length }})</span>
+                        </span>
+                        <span class="toggle-icon"><i class="bi bi-chevron-down"></i></span>
+                    </div>
+                    <div class="player-games-container" style="display: none;">
+                        {% for game_obj in group.list %}
+                            {% include "game_row.html" with game=game_obj %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
         
-        {% if tournament.games|length > 10 %}
-            <div class="show-more-container">
-                <button class="show-more-btn" onclick="showMoreGames(this)" data-offset="10">Show More <i class="bi bi-chevron-down"></i></button>
-            </div>
-            <div class="hidden-games" style="display: none;">
-                {% for game_obj in tournament.games|slice:"10:" %}
-                    {% include "game_row.html" with game=game_obj %}
-                {% endfor %}
-            </div>
-        {% endif %}
+        <!-- Then display all individual games -->
+        {% for group in player_groups %}
+            {% if group.list|length == 1 %}
+                <!-- Single game, no grouping needed -->
+                {% include "game_row.html" with game=group.list.0 %}
+            {% endif %}
+        {% endfor %}
     </div>
 </div>

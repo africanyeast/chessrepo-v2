@@ -18,6 +18,49 @@ def extract_opening_from_chesscom_ecourl(eco_url: str | None) -> str:
         if match:
             return match.group(1).replace('-', ' ') # replace hyphens with spaces for readability
         return ""
+# extracting tournament name from the tournament headers
+# an example: https://www.chess.com/tournament/live/late-titled-tuesday-blitz-may-06-2025-5632457
+# the tournament name is "Late-Titled Tuesday Blitz" remove the date, url, and id
+# But if tournament is not titled tuesday or freestyle friday, use whatever is passed in the headers directly
+def extract_chesscom_tournament_name(tournament_header):
+   
+    if not tournament_header:
+        return ""
+        
+    tournament_name = tournament_header
+    
+    # Extract just the tournament name from the URL if it's a chess.com URL
+    if "chess.com/tournament" in tournament_name:
+        tournament_name = tournament_name.split("/")[-1]
+    # Replace hyphens with spaces
+    tournament_name = tournament_name.replace("-", " ")
+    
+    # Remove date patterns
+    # Handle various date formats
+    date_patterns = [
+        r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[- ]\d{2}[- ]\d{4}',  # may-06-2025
+        r'\d{4}[- ]\d{2}[- ]\d{2}',  # 2025-05-06
+        r'(?:january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{4}',  # may 2025
+        r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s+\d{4}',  # may 2025
+        r'\s+\d{4}\s*$',  # trailing year
+        r'\s+20\d{2}\s*$'  # trailing 20XX year
+    ]
+    
+    for pattern in date_patterns:
+        tournament_name = re.sub(pattern, '', tournament_name, flags=re.IGNORECASE)
+    
+    # Remove numeric IDs at the end (common in chess.com URLs)
+    tournament_name = re.sub(r'\s+\d+\s*$', '', tournament_name)
+    
+    # Clean up special characters and multiple spaces
+    tournament_name = re.sub(r'[^\w\s]', ' ', tournament_name)  # Replace special chars with space
+    tournament_name = re.sub(r'\s+', ' ', tournament_name)  # Normalize spaces
+    
+    # Title case the tournament name for consistency
+    tournament_name = tournament_name.title()
+    
+    return tournament_name.strip()
+
 
 def generate_pgn_hash(pgn_string: str) -> str:
         return hashlib.sha256(pgn_string.encode('utf-8')).hexdigest()
@@ -85,28 +128,12 @@ def pgn_to_dict(pgn_string: str, source: str, pgn_hash: str) -> dict:
             else:
                 opening_name = ""
             # extracting tournament name from the tournament headers
-            # an example: https://www.chess.com/tournament/live/late-titled-tuesday-blitz-may-06-2025-5632457
-            # the tournament name is "Late-Titled Tuesday Blitz" remove the date, url, and id
-            # But if tournament is not titled tuesday or freestyle friday, use whatever is passed in the headers directly
             tournament_name = ""
             if headers.get("Tournament"):
-                tournament_name = headers.get("Tournament", "")
-                # Extract just the tournament name from the URL if it's a chess.com URL
-                if "chess.com/tournament" in tournament_name:
-                    tournament_name = tournament_name.split("/")[-1]
-                # Only apply regex for Titled Tuesday and Freestyle Friday tournaments
-                if "titled-tuesday" in tournament_name.lower() or "freestyle-friday" or "bullet-brawl" in tournament_name.lower():
-                    tournament_name = tournament_name.replace("-", " ")
-                    # Remove date patterns (like may-06-2025 or 2025-05-06)
-                    tournament_name = re.sub(r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[- ]\d{2}[- ]\d{4}', '', tournament_name, flags=re.IGNORECASE)
-                    tournament_name = re.sub(r'\d{4}[- ]\d{2}[- ]\d{2}', '', tournament_name)
-                    # Remove any remaining numbers (like the tournament ID)
-                    tournament_name = re.sub(r'\d+', '', tournament_name)
-                    # Clean up extra spaces and trim
-                    tournament_name = re.sub(r'\s+', ' ', tournament_name).strip()
+                tournament_name = extract_chesscom_tournament_name(headers.get("Tournament"))
             else:
-                tournament_name = headers.get("Event", "") # Default value to event name for non-titled tournaments
-
+                # fallback to Event if tournament is not available
+                tournament_name = extract_tournament_name(headers.get("Event", ""))
             
             return {
                 "white": white_player,

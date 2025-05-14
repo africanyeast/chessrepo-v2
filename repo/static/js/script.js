@@ -144,6 +144,43 @@ document.addEventListener('DOMContentLoaded', function () {
         if (chessBoardContainer) chessBoardContainer.style.display = '';
     }
 
+    // Function to create a title badge element
+    function createTitleBadge(title) {
+        if (!title) return null;
+        
+        // Normalize the title (uppercase and trim)
+        const normalizedTitle = title.toUpperCase().trim();
+        
+        // Create the badge element
+        const badge = document.createElement('span');
+        badge.className = `chess-title-badge`;
+        badge.textContent = normalizedTitle;
+        
+        return badge;
+    }
+
+    // Function to format player name with title
+    function formatPlayerWithTitle(name, title, username) {
+        const container = document.createElement('span');
+        container.className = 'player-name-container';
+        
+        // Add title badge if player has a title
+        if (title) {
+            const badge = createTitleBadge(title);
+            if (badge) {
+                container.appendChild(badge);
+            }
+        }
+        
+        // Add player name
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'player-name';
+        nameSpan.textContent = name || username || 'N/A';
+        container.appendChild(nameSpan);
+        
+        return container;
+    }
+
     // Function to handle game selection
     async function handleGameSelection(gameRow) {
         if (!gameRow) return;
@@ -154,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         gameRow.classList.add('selected-game');
         currentSelectedGameRow = gameRow;
-
+    
         // Set layout for active game
         setActiveGameLayout();
         
@@ -168,16 +205,34 @@ document.addEventListener('DOMContentLoaded', function () {
         const gameData = await fetchGamePGN(gameId);
         
         if (gameData && gameData.pgn) {
-            // Update game details with data from API
-            // Format player names based on the new data structure
-            const whiteName = gameData.white ? 
-                (gameData.white.name || gameData.white_username || 'N/A') : 
-                (gameData.white_username || 'N/A');
-            const blackName = gameData.black ? 
-                (gameData.black.name || gameData.black_username || 'N/A') : 
-                (gameData.black_username || 'N/A');
+            // Clear the player names container
+            gamePlayerNames.innerHTML = '';
             
-            gamePlayerNames.textContent = `${whiteName} - ${blackName}`;
+            // Create white player element with title
+            const whitePlayerElement = formatPlayerWithTitle(
+                gameData.white_name,
+                gameData.white_title,
+                gameData.white_username
+            );
+            
+            // Create separator with proper spacing
+            const separator = document.createElement('span');
+            separator.className = 'player-name-separator';
+            separator.textContent = '-';
+            
+            // Create black player element with title
+            const blackPlayerElement = formatPlayerWithTitle(
+                gameData.black_name,
+                gameData.black_title,
+                gameData.black_username
+            );
+            
+            // Add white player, separator, and black player
+            gamePlayerNames.appendChild(whitePlayerElement);
+            gamePlayerNames.appendChild(separator);
+            gamePlayerNames.appendChild(blackPlayerElement);
+            
+            // Update other game information
             gameTournamentName.textContent = gameData.tournament || 'N/A';
             gameResult.textContent = gameData.result || 'N/A';
             gameOpening.textContent = gameData.opening || '-';
@@ -209,21 +264,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize the page
     setInitialLayout();
+    
+    // Initialize tournament containers based on game count
+    initializeTournamentContainers();
 
     // set theme and store choice in browser storage
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = themeToggle.querySelector('i');
-    const themeText = themeToggle.querySelector('small');
     const currentTheme = localStorage.getItem('theme') || 'light';
 
     // Initial setup based on stored preference
     if (currentTheme === 'dark') {
         document.body.classList.add('dark-mode');
         themeIcon.className = 'bi bi-sun-fill text-white';
-        themeText.textContent = 'Light';
     } else {
         themeIcon.className = 'bi bi-moon-stars-fill text-white';
-        themeText.textContent = 'Dark';
     }
 
     // Toggle theme when button is clicked
@@ -235,10 +290,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Update icon and text based on new theme
         if (isDarkMode) {
             themeIcon.className = 'bi bi-sun-fill text-white';
-            themeText.textContent = 'Light';
         } else {
             themeIcon.className = 'bi bi-moon-stars-fill text-white';
-            themeText.textContent = 'Dark';
         }
         
         localStorage.setItem('theme', newTheme);
@@ -263,136 +316,6 @@ function toggleTournament(headerElement) {
         gamesContainer.style.display = 'none';
         toggleIcon.classList.remove('bi-chevron-up');
         toggleIcon.classList.add('bi-chevron-down');
-    }
-}
-
-/**
- * Show more games for a tournament
- * @param {HTMLElement} button - The "Show More" button
- * @param {Array} [gamesToShow] - Optional array of game elements to show
- * @param {boolean} [resetButton] - Whether to reset the button state
- */
-function showMoreGames(button, gamesToShow, resetButton = false) {
-    const container = button.closest('.tournament-container');
-    const hiddenGames = container.querySelector('.hidden-games');
-    const gamesContainer = container.querySelector('.games-container');
-    
-    // Reset button if needed
-    if (resetButton) {
-        button.setAttribute('data-offset', '10');
-    }
-    
-    const offset = parseInt(button.getAttribute('data-offset'));
-    
-    // If specific games are provided, use those
-    if (gamesToShow && Array.isArray(gamesToShow)) {
-        // Show up to 10 more games from the provided array
-        const nextBatch = gamesToShow.slice(offset - 10, offset);
-        let count = 0;
-        
-        nextBatch.forEach(game => {
-            gamesContainer.insertBefore(game, button.parentElement);
-            count++;
-        });
-        
-        // Update the offset
-        const newOffset = offset + count;
-        button.setAttribute('data-offset', newOffset);
-        
-        // Hide the "Show More" button if all games are displayed
-        const remainingGames = gamesToShow.length - (newOffset - 10);
-        if (remainingGames <= 0) {
-            button.parentElement.style.display = 'none';
-        } else {
-            button.parentElement.style.display = '';
-        }
-        
-        return;
-    }
-    
-    // Original functionality for showing more games from hidden container
-    const gameElements = hiddenGames.querySelectorAll('.game-row');
-    let count = 0;
-    
-    for (let i = 0; i < gameElements.length && count < 10; i++) {
-        const game = gameElements[i];
-        gamesContainer.insertBefore(game, button.parentElement);
-        count++;
-    }
-    
-    // Update the offset
-    const newOffset = offset + count;
-    button.setAttribute('data-offset', newOffset);
-    
-    // Get the total games count (either filtered or total)
-    const totalGames = parseInt(container.getAttribute('data-filtered-games') || 
-                               container.getAttribute('data-total-games'));
-    
-    // Hide the "Show More" button if all games are displayed
-    if (newOffset >= totalGames) {
-        button.parentElement.style.display = 'none';
-    }
-}
-
-/**
- * Reorganize games in a tournament based on filtering
- * @param {HTMLElement} tournamentGroup - The tournament container
- * @param {Array} visibleGameElements - Array of visible game elements
- * @param {Array} hiddenGameElements - Array of hidden game elements
- */
-function reorganizeGames(tournamentGroup, visibleGameElements, hiddenGameElements) {
-    const gamesContainer = tournamentGroup.querySelector('.games-container');
-    const hiddenGamesContainer = tournamentGroup.querySelector('.hidden-games');
-    const showMoreContainer = tournamentGroup.querySelector('.show-more-container');
-    
-    if (!gamesContainer || !hiddenGamesContainer || !showMoreContainer) {
-        return;
-    }
-    
-    // Move all visible games to the main container (up to 10)
-    const visibleToShow = visibleGameElements.slice(0, 10);
-    const visibleToHide = visibleGameElements.slice(10);
-    
-    // Clear the containers
-    while (gamesContainer.firstChild) {
-        if (gamesContainer.firstChild.classList && 
-            gamesContainer.firstChild.classList.contains('show-more-container')) {
-            break;
-        }
-        gamesContainer.removeChild(gamesContainer.firstChild);
-    }
-    
-    hiddenGamesContainer.innerHTML = '';
-    
-    // Add visible games to main container
-    visibleToShow.forEach(game => {
-        gamesContainer.insertBefore(game, showMoreContainer);
-    });
-    
-    // Add remaining visible games to hidden container
-    visibleToHide.forEach(game => {
-        hiddenGamesContainer.appendChild(game);
-    });
-    
-    // Add hidden games to hidden container
-    hiddenGameElements.forEach(game => {
-        hiddenGamesContainer.appendChild(game);
-    });
-    
-    // Update show more button visibility based on whether there are more games to show
-    const showMoreBtn = showMoreContainer.querySelector('.show-more-btn');
-    if (showMoreBtn) {
-        showMoreBtn.setAttribute('data-offset', '10');
-        
-        // Store the filtered games count for later use
-        if (visibleGameElements.length > 0) {
-            tournamentGroup.setAttribute('data-filtered-games', visibleGameElements.length.toString());
-        } else {
-            tournamentGroup.removeAttribute('data-filtered-games');
-        }
-        
-        // Only show the button if there are more visible games to show
-        showMoreContainer.style.display = visibleToHide.length > 0 ? '' : 'none';
     }
 }
 
@@ -435,133 +358,162 @@ function filterGames(filterValue, isVariant = false) {
             visibleGamesCount++;
         });
         
-        // Restore original tournament counts
-        document.querySelectorAll('.tournament-container').forEach(tournamentGroup => {
-            const totalGames = parseInt(tournamentGroup.getAttribute('data-total-games') || '0');
-            const tournamentNameEl = tournamentGroup.querySelector('.tournament-name');
-            if (tournamentNameEl) {
-                const tournamentName = tournamentNameEl.textContent.split('(')[0].trim();
-                tournamentNameEl.textContent = `${tournamentName} (${totalGames})`;
-            }
-            
-            // Make sure all games containers are visible
-            const gamesContainer = tournamentGroup.querySelector('.games-container');
-            if (gamesContainer) {
-                gamesContainer.style.display = 'block';
-            }
-            
-            // Reset the tournament to its original state
-            tournamentGroup.removeAttribute('data-filtered-games');
-            
-            // Get all games and reorganize them
-            const allGames = Array.from(tournamentGroup.querySelectorAll('.game-row-interactive'));
-            reorganizeGames(tournamentGroup, allGames, []);
+        // Show all player groups
+        document.querySelectorAll('.player-group-container').forEach(group => {
+            group.style.display = '';
         });
         
-        // Check if there are any games at all
-        if (visibleGamesCount === 0) {
-            // Create new message for "No games found"
-            const noGamesMessage = document.createElement('div');
-            noGamesMessage.className = 'p-3 text-center no-games-message';
-            noGamesMessage.innerHTML = '<p>No games found</p>';
-            
-            // Add the new message
-            const eventsContainer = document.querySelector('.events-container');
-            if (eventsContainer) {
-                eventsContainer.appendChild(noGamesMessage);
-            }
-        }
-        
-        return; // Exit early since we've shown all games
-    }
-    
-    // For specific filters (not "all")
-    gameElements.forEach(gameEl => {
-        const gameFormat = gameEl.getAttribute('data-format');
-        const gameVariant = gameEl.getAttribute('data-variant');
-        
-        if (isVariant) {
-            // For Chess960, filter by variant
-            if (gameVariant && gameVariant.toLowerCase() === filterValue.toLowerCase()) {
-                gameEl.style.display = '';
-                visibleGamesCount++;
-            } else {
-                gameEl.style.display = 'none';
-            }
-        } else {
-            // For other formats, filter by format
-            if (gameFormat && gameFormat.toLowerCase() === filterValue) {
-                gameEl.style.display = '';
-                visibleGamesCount++;
-            } else {
-                gameEl.style.display = 'none';
-            }
-        }
-    });
-
-    // Check if any games are visible in each tournament and update counts
-    const tournamentContainers = document.querySelectorAll('.tournament-container');
-    let anyTournamentVisible = false;
-    
-    tournamentContainers.forEach(tournamentGroup => {
-        // Make sure we're selecting the correct elements within this tournament group
-        const allGames = Array.from(tournamentGroup.querySelectorAll('.game-row-interactive'));
-        const visibleGameElements = allGames.filter(game => game.style.display !== 'none');
-        const hiddenGameElements = allGames.filter(game => game.style.display === 'none');
-        const visibleGames = visibleGameElements.length;
-        
-        const tournamentNameEl = tournamentGroup.querySelector('.tournament-name');
-        
-        if (visibleGames === 0) {
-            tournamentGroup.style.display = 'none';
-        } else {
-            tournamentGroup.style.display = '';
-            anyTournamentVisible = true;
-            
-            // Make sure the games container is visible
-            const gamesContainer = tournamentGroup.querySelector('.games-container');
-            if (gamesContainer) {
-                gamesContainer.style.display = 'block';
-            }
-            
-            // Update the count to show only filtered games
+        // Restore original tournament counts
+        document.querySelectorAll('.tournament-container').forEach(tournamentGroup => {
+            const totalGames = parseInt(tournamentGroup.getAttribute('data-total-games'));
+            const tournamentNameEl = tournamentGroup.querySelector('.tournament-name');
             if (tournamentNameEl) {
-                // Extract the tournament name and update with new count
-                const tournamentName = tournamentNameEl.textContent.split('(')[0].trim();
-                tournamentNameEl.textContent = `${tournamentName} (${visibleGames})`;
+                const gameCountEl = tournamentNameEl.querySelector('.game-count');
+                if (gameCountEl) {
+                    gameCountEl.textContent = `(${totalGames})`;
+                }
             }
-            
-            // Use the reorganizeGames function to handle the game elements
-            reorganizeGames(tournamentGroup, visibleGameElements, hiddenGameElements);
-        }
-    });
-    
-    // Show "No games found" message if no tournaments are visible
-    const eventsContainer = document.querySelector('.events-container');
-    
-    if (!anyTournamentVisible) {
-        // Check if a "no games" message already exists
-        const existingNoGamesMessage = document.querySelector('.no-filtered-games-message, .no-games-message');
+        });
+    } else {
+        // Filter games by format or variant
+        const visibleGameElements = [];
+        const hiddenGameElements = [];
         
-        if (existingNoGamesMessage) {
-            // Update existing message
-            const messageParagraph = existingNoGamesMessage.querySelector('p');
-            if (messageParagraph) {
-                messageParagraph.textContent = 'No games found';
-            }
-        } else {
-            // Create new message
-            const noGamesMessage = document.createElement('div');
-            noGamesMessage.className = 'p-3 text-center no-filtered-games-message';
-            noGamesMessage.innerHTML = '<p>No games found</p>';
+        gameElements.forEach(gameEl => {
+            const gameFormat = gameEl.getAttribute('data-format');
+            const gameVariant = gameEl.getAttribute('data-variant');
             
-            // Add the new message
+            const matchesFilter = isVariant 
+                ? (gameVariant && gameVariant.toLowerCase() === filterValue.toLowerCase())
+                : (gameFormat && gameFormat.toLowerCase() === filterValue.toLowerCase());
+            
+            if (matchesFilter) {
+                gameEl.style.display = '';
+                visibleGameElements.push(gameEl);
+                visibleGamesCount++;
+            } else {
+                gameEl.style.display = 'none';
+                hiddenGameElements.push(gameEl);
+            }
+        });
+        
+        // Process player groups - hide those with no visible games
+        document.querySelectorAll('.player-group-container').forEach(group => {
+            const groupGames = Array.from(group.querySelectorAll('.game-row-interactive'));
+            const visibleGroupGames = groupGames.filter(game => 
+                visibleGameElements.includes(game)
+            );
+            
+            if (visibleGroupGames.length === 0) {
+                // Hide the entire group if no games match the filter
+                group.style.display = 'none';
+            } else {
+                group.style.display = '';
+                
+                // Update the game count in the player group header
+                const playerGroupNameEl = group.querySelector('.player-group-name');
+                if (playerGroupNameEl) {
+                    const gameCountEl = playerGroupNameEl.querySelector('.game-count');
+                    if (gameCountEl) {
+                        gameCountEl.textContent = `(${visibleGroupGames.length})`;
+                    }
+                }
+            }
+        });
+        
+        // Process tournaments - hide those with no visible games
+        document.querySelectorAll('.tournament-container').forEach(tournamentGroup => {
+            // Check if this tournament has any visible games
+            const tournamentGames = Array.from(tournamentGroup.querySelectorAll('.game-row-interactive'));
+            const visibleTournamentGames = tournamentGames.filter(game => 
+                visibleGameElements.includes(game)
+            );
+            
+            if (visibleTournamentGames.length === 0) {
+                // Hide the entire tournament if no games match the filter
+                tournamentGroup.style.display = 'none';
+            } else {
+                // Update the tournament game count
+                const tournamentNameEl = tournamentGroup.querySelector('.tournament-name');
+                if (tournamentNameEl) {
+                    const gameCountEl = tournamentNameEl.querySelector('.game-count');
+                    if (gameCountEl) {
+                        gameCountEl.textContent = `(${visibleTournamentGames.length})`;
+                    }
+                }
+                
+                // Update the tournament's data-filtered-games attribute
+                tournamentGroup.setAttribute('data-filtered-games', visibleTournamentGames.length.toString());
+            }
+        });
+    }
+    // Check if there are any games at all
+    if (visibleGamesCount === 0) {
+        // Create new message for "No games found"
+        const noGamesMessage = document.createElement('div');
+        noGamesMessage.className = 'p-3 text-center no-games-message';
+        noGamesMessage.innerHTML = '<p>No games found</p>';
+        
+        // Add the new message
+        const eventsContainer = document.querySelector('.events-container');
+        if (eventsContainer) {
             eventsContainer.appendChild(noGamesMessage);
         }
     }
 }
 
-// Make functions globally available
+/**
+ * Toggle player group games visibility
+ * @param {HTMLElement} headerElement - The player group header element
+ */
+function togglePlayerGroup(headerElement) {
+    const container = headerElement.closest('.player-group-container');
+    const gamesContainer = container.querySelector('.player-games-container');
+    const toggleIcon = headerElement.querySelector('.toggle-icon i');
+    
+    if (gamesContainer.style.display === 'none') {
+        gamesContainer.style.display = 'block';
+        toggleIcon.classList.remove('bi-chevron-down');
+        toggleIcon.classList.add('bi-chevron-up');
+    } else {
+        gamesContainer.style.display = 'none';
+        toggleIcon.classList.remove('bi-chevron-up');
+        toggleIcon.classList.add('bi-chevron-down');
+    }
+}
+
+/**
+ * Initialize tournament containers based on game count
+ * Sets initial state: open if ≤10 games, closed if >10 games
+ */
+function initializeTournamentContainers() {
+    document.querySelectorAll('.tournament-container').forEach(container => {
+        // Count individual games and player groups
+        const individualGames = container.querySelectorAll('.games-container > .game-row-interactive:not(.player-group-container .game-row-interactive)').length;
+        const playerGroups = container.querySelectorAll('.games-container > .player-group-container').length;
+        
+        // Total count (individual games + player groups)
+        const totalItems = individualGames + playerGroups;
+        
+        // Get elements
+        const gamesContainer = container.querySelector('.games-container');
+        const toggleIcon = container.querySelector('.event-header .toggle-icon i');
+        
+        if (totalItems > 10) {
+            // If more than 10 items, close by default
+            gamesContainer.style.display = 'none';
+            toggleIcon.classList.remove('bi-chevron-up');
+            toggleIcon.classList.add('bi-chevron-down');
+        } else {
+            // If 10 or fewer items, open by default
+            gamesContainer.style.display = 'block';
+            toggleIcon.classList.remove('bi-chevron-down');
+            toggleIcon.classList.add('bi-chevron-up');
+        }
+    });
+}
+
+// Make functions available globally
+window.togglePlayerGroup = togglePlayerGroup;
 window.toggleTournament = toggleTournament;
-window.showMoreGames = showMoreGames;
 window.filterGames = filterGames;

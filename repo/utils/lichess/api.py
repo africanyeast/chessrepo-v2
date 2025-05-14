@@ -36,8 +36,8 @@ class LICHESS_API:
             tour_tier = tour_info.get('tier')
             is_round_finished = round_to_link_info.get('finished', False)
             round_id = round_to_link_info.get('id')
-
-            if tour_tier >= 1 and is_round_finished and round_id:
+            #only tier 3 and higher events for now
+            if tour_tier >= 3 and is_round_finished and round_id:
                 finished_round_ids.append(round_id)
                 
         
