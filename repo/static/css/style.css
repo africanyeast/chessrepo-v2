@@ -80,7 +80,7 @@ body {
 .navbar {
     background-color: var(--header-color) !important;
     border-bottom: 1px solid var(--border-color);
-    padding: 5px 10px;
+    padding: 3px 10px;
 }
 
 .navbar-brand {
@@ -95,23 +95,30 @@ body {
     width: 130px;
 }
 
-.nav-btn button {
+.nav-btn button, .nav-btn a {
     background-color: rgba(255,255,255,0.07);
     padding: 5px 10px;
 }
 
-.nav-btn button small{
+.nav-btn i{
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.nav-btn button small, .nav-btn a small{
     font-weight: 600;
+    font-size: 0.8rem;
 }
 
-.search-button {
+.theme-button {
     color: white;
     border: none;
 }
 
-.menu-button {
+.support-button {
     color: white;
     border: none;
+    text-decoration: none;
 }
 
 .filter-nav {
@@ -172,7 +179,7 @@ body {
 
 
 .events-container {
-    max-height: calc(100vh - 180px); /* Adjust 180px based on the actual combined height of your header, filter, and date navigation elements */
+    max-height: calc(100vh - 150px); /* Adjust 180px based on the actual combined height of your header, filter, and date navigation elements */
     overflow-y: auto;
 }
 
@@ -180,7 +187,7 @@ body {
 .event-header {
     padding: 8px 12px;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     background-color: var(--event-header);
     border-bottom: 1px solid var(--border-color);
     text-transform: capitalize;
@@ -194,7 +201,7 @@ body {
     overflow: hidden;
 }
 
-.game-count{
+.game-count, .match-score{
     font-size: 0.8rem;
     font-weight: 400;
     color: var(--text-muted);
@@ -234,6 +241,22 @@ body {
 .player-group-versus{
     text-transform: none;
 }
+.match-score{
+    text-transform: lowercase;
+}
+.match-score .fraction {
+    position: relative;
+    display: inline-block;
+    margin: 0 1px;
+}
+
+.match-score .fraction sup {
+    font-size: 0.6em;
+    position: relative;
+    top: -0.5em;
+    left: -1px;
+}
+
 
 .player-games-container {
     width: 100%;
@@ -265,9 +288,23 @@ body {
 
 .game-time {
     color: #777;
-    width: 40px;
+    width: auto;
     text-align: center;
-    display: none;
+    margin-right: 5px;
+    /* display: none; */
+}
+
+.game-result {
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+.game-row.selected-game .game-result {
+    font-size: 0.85rem;
+    /* border:1px solid var(--active-game-color); */
 }
 
 .game-view-section {
@@ -299,6 +336,11 @@ body {
     font-size: 0.85rem;
     color: var(--text-color);
     font-weight: 400;
+}
+
+.player-elo{
+    font-size: 0.85rem;
+    color: var(--text-muted);
 }
 
 .game-view-info, .chess-board-container {
@@ -530,7 +572,6 @@ body {
         font-size: 400;
     }
     .footer-links{
-        font-size: 0.65rem;
-        font-weight: 600;
+        font-size: 0.85rem;
     }
 }

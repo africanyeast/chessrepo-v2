@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let gameResult = document.getElementById('gameResult');
     let gameOpening = document.getElementById('gameOpening');
     let gameSite = document.getElementById('gameSite');
+    let gameFormat = document.getElementById('gameFormat');
     
     // Game view containers
     let gameViewHeader = document.querySelector('.game-view-header');
@@ -160,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Function to format player name with title
-    function formatPlayerWithTitle(name, title, username) {
+    function formatPlayerWithTitle(name, title, username, elo) {
         const container = document.createElement('span');
         container.className = 'player-name-container';
         
@@ -175,7 +176,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add player name
         const nameSpan = document.createElement('span');
         nameSpan.className = 'player-name';
-        nameSpan.textContent = name || username || 'N/A';
+        //nameSpan.textContent = name || username || 'N/A';
+        // add not just name but also elo in brackets
+        nameSpan.innerHTML = `${name || username || 'N/A'} <span class="player-elo">(${elo || '-'})</span>`;
         container.appendChild(nameSpan);
         
         return container;
@@ -212,7 +215,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const whitePlayerElement = formatPlayerWithTitle(
                 gameData.white_name,
                 gameData.white_title,
-                gameData.white_username
+                gameData.white_username,
+                gameData.whiteelo
             );
             
             // Create separator with proper spacing
@@ -224,7 +228,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const blackPlayerElement = formatPlayerWithTitle(
                 gameData.black_name,
                 gameData.black_title,
-                gameData.black_username
+                gameData.black_username,
+                gameData.blackelo
             );
             
             // Add white player, separator, and black player
@@ -234,9 +239,10 @@ document.addEventListener('DOMContentLoaded', function () {
             
             // Update other game information
             gameTournamentName.textContent = gameData.tournament || 'N/A';
-            gameResult.textContent = gameData.result || 'N/A';
+            gameResult.textContent = formatGameResult(gameData.result);
             gameOpening.textContent = gameData.opening || '-';
-            gameSite.textContent = gameData.site || '-';
+            gameSite.textContent = (gameData.site && gameData.site.trim() !== '?') ? gameData.site : '-';
+            gameFormat.textContent = gameData.format || '-';
             
             // Initialize PGN viewer
             const gamePgnPosition = document.getElementById('gamePgnPosition');
@@ -320,149 +326,6 @@ function toggleTournament(headerElement) {
 }
 
 /**
- * Filter games based on format or variant
- * @param {string} filterValue - The format to filter by (bullet, blitz, rapid, classical) or 'all'
- * @param {boolean} isVariant - Whether to filter by variant instead of format (for Chess960)
- */
-function filterGames(filterValue, isVariant = false) {
-    // Update active class on filter buttons
-    document.querySelectorAll('.filter-nav .nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.textContent.toLowerCase() === filterValue || 
-            (filterValue === 'all' && link.textContent.toLowerCase() === 'all')) {
-            link.classList.add('active');
-        }
-    });
-    
-    // Get all game elements
-    const gameElements = document.querySelectorAll('.game-row-interactive');
-    
-    // Show/hide games based on filter
-    let visibleGamesCount = 0;
-    
-    // First, make all tournament containers visible again
-    document.querySelectorAll('.tournament-container').forEach(container => {
-        container.style.display = '';
-    });
-    
-    // Remove any existing "no games found" message
-    const existingNoGamesMessage = document.querySelector('.no-filtered-games-message, .no-games-message');
-    if (existingNoGamesMessage) {
-        existingNoGamesMessage.remove();
-    }
-    
-    // Special handling for "all" filter - show everything
-    if (filterValue === 'all') {
-        gameElements.forEach(gameEl => {
-            gameEl.style.display = '';
-            visibleGamesCount++;
-        });
-        
-        // Show all player groups
-        document.querySelectorAll('.player-group-container').forEach(group => {
-            group.style.display = '';
-        });
-        
-        // Restore original tournament counts
-        document.querySelectorAll('.tournament-container').forEach(tournamentGroup => {
-            const totalGames = parseInt(tournamentGroup.getAttribute('data-total-games'));
-            const tournamentNameEl = tournamentGroup.querySelector('.tournament-name');
-            if (tournamentNameEl) {
-                const gameCountEl = tournamentNameEl.querySelector('.game-count');
-                if (gameCountEl) {
-                    gameCountEl.textContent = `(${totalGames})`;
-                }
-            }
-        });
-    } else {
-        // Filter games by format or variant
-        const visibleGameElements = [];
-        const hiddenGameElements = [];
-        
-        gameElements.forEach(gameEl => {
-            const gameFormat = gameEl.getAttribute('data-format');
-            const gameVariant = gameEl.getAttribute('data-variant');
-            
-            const matchesFilter = isVariant 
-                ? (gameVariant && gameVariant.toLowerCase() === filterValue.toLowerCase())
-                : (gameFormat && gameFormat.toLowerCase() === filterValue.toLowerCase());
-            
-            if (matchesFilter) {
-                gameEl.style.display = '';
-                visibleGameElements.push(gameEl);
-                visibleGamesCount++;
-            } else {
-                gameEl.style.display = 'none';
-                hiddenGameElements.push(gameEl);
-            }
-        });
-        
-        // Process player groups - hide those with no visible games
-        document.querySelectorAll('.player-group-container').forEach(group => {
-            const groupGames = Array.from(group.querySelectorAll('.game-row-interactive'));
-            const visibleGroupGames = groupGames.filter(game => 
-                visibleGameElements.includes(game)
-            );
-            
-            if (visibleGroupGames.length === 0) {
-                // Hide the entire group if no games match the filter
-                group.style.display = 'none';
-            } else {
-                group.style.display = '';
-                
-                // Update the game count in the player group header
-                const playerGroupNameEl = group.querySelector('.player-group-name');
-                if (playerGroupNameEl) {
-                    const gameCountEl = playerGroupNameEl.querySelector('.game-count');
-                    if (gameCountEl) {
-                        gameCountEl.textContent = `(${visibleGroupGames.length})`;
-                    }
-                }
-            }
-        });
-        
-        // Process tournaments - hide those with no visible games
-        document.querySelectorAll('.tournament-container').forEach(tournamentGroup => {
-            // Check if this tournament has any visible games
-            const tournamentGames = Array.from(tournamentGroup.querySelectorAll('.game-row-interactive'));
-            const visibleTournamentGames = tournamentGames.filter(game => 
-                visibleGameElements.includes(game)
-            );
-            
-            if (visibleTournamentGames.length === 0) {
-                // Hide the entire tournament if no games match the filter
-                tournamentGroup.style.display = 'none';
-            } else {
-                // Update the tournament game count
-                const tournamentNameEl = tournamentGroup.querySelector('.tournament-name');
-                if (tournamentNameEl) {
-                    const gameCountEl = tournamentNameEl.querySelector('.game-count');
-                    if (gameCountEl) {
-                        gameCountEl.textContent = `(${visibleTournamentGames.length})`;
-                    }
-                }
-                
-                // Update the tournament's data-filtered-games attribute
-                tournamentGroup.setAttribute('data-filtered-games', visibleTournamentGames.length.toString());
-            }
-        });
-    }
-    // Check if there are any games at all
-    if (visibleGamesCount === 0) {
-        // Create new message for "No games found"
-        const noGamesMessage = document.createElement('div');
-        noGamesMessage.className = 'p-3 text-center no-games-message';
-        noGamesMessage.innerHTML = '<p>No games found</p>';
-        
-        // Add the new message
-        const eventsContainer = document.querySelector('.events-container');
-        if (eventsContainer) {
-            eventsContainer.appendChild(noGamesMessage);
-        }
-    }
-}
-
-/**
  * Toggle player group games visibility
  * @param {HTMLElement} headerElement - The player group header element
  */
@@ -513,7 +376,13 @@ function initializeTournamentContainers() {
     });
 }
 
+function formatGameResult(result) {
+    if (result === "1/2-1/2") {
+        return "½-½";
+    }
+    return result;
+}
+
 // Make functions available globally
 window.togglePlayerGroup = togglePlayerGroup;
 window.toggleTournament = toggleTournament;
-window.filterGames = filterGames;

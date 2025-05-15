@@ -35,8 +35,8 @@ class Game(models.Model):
     result = models.CharField(max_length=10, blank=True, null=True)
     opening = models.CharField(max_length=255, blank=True, null=True)
     eco = models.CharField(max_length=10, blank=True, null=True)
-    whiteelo = models.IntegerField(blank=True, null=True)
-    blackelo = models.IntegerField(blank=True, null=True)
+    whiteelo = models.CharField(blank=True, null=True)
+    blackelo = models.CharField(blank=True, null=True)
     event = models.CharField(max_length=255, blank=True, null=True)
     site = models.CharField(max_length=255, blank=True, null=True)
     tournament = models.CharField(max_length=255, blank=True, null=True)
@@ -76,11 +76,11 @@ class Game(models.Model):
         verbose_name_plural = 'Games'
         indexes = [
             models.Index(fields=['date']),
-            models.Index(fields=['date', 'endtime']),
-            models.Index(fields=['white']),
-            models.Index(fields=['black']),
-            models.Index(fields=['tournament']),
-            models.Index(fields=['tournament', 'endtime']),
+            # models.Index(fields=['date', 'endtime']),
+            # models.Index(fields=['white']),
+            # models.Index(fields=['black']),
+            # models.Index(fields=['tournament']),
+            # models.Index(fields=['tournament', 'endtime']),
         ]
 
 

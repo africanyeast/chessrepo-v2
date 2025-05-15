@@ -111,11 +111,11 @@ def index(request):
     Game.objects.filter(date=target_date)
         .select_related('white', 'black')
         .values(
-            'id', 'result', 'format', 'variant', 'tournament', 'source', 'endtime',
-            'white__id', 'white__title', 'white__name', 'white_username',
-            'black__id', 'black__title', 'black__name', 'black_username'
+            'id', 'result', 'tournament', 'endtime',
+            'white__id', 'white__title', 'white__name', 'white_username', 'whiteelo',
+            'black__id', 'black__title', 'black__name', 'black_username', 'blackelo'
         )
-        .order_by('tournament', 'endtime')
+        .order_by('endtime')
     )
 
     # First, group games by player pairs
@@ -129,15 +129,18 @@ def index(request):
         black_name = (game['black__name'] or game['black_username'] or '').lower().strip()
         
         # Create a normalized player pair identifier using player IDs when available
-        # This ensures consistent pairing regardless of who is white/black
+        tournament = game['tournament'] or ''
         if white_id and black_id:
-            # Sort IDs to ensure consistent pairing regardless of colors
             player_ids = sorted([white_id, black_id])
-            player_pair = f"id-{player_ids[0]}-{player_ids[1]}"
+            player_pair = f"id-{tournament}-{player_ids[0]}-{player_ids[1]}"
         else:
-            # Fallback to names if IDs aren't available
             players = sorted([white_name, black_name])
-            player_pair = f"name-{players[0]}-{players[1]}"
+            player_pair = f"name-{tournament}-{players[0]}-{players[1]}"
+        
+        # Calculate total rating for sorting
+        white_elo = game.get('whiteelo') or 0
+        black_elo = game.get('blackelo') or 0
+        total_rating = int(white_elo) + int(black_elo)
         
         game_data = {
             'id': game['id'],
@@ -154,14 +157,12 @@ def index(request):
             },
             'black_username': game['black_username'],
             'result': game['result'],
-            'format': game['format'],
-            'variant': game['variant'],
             'tournament': game['tournament'],
             'endtime': game['endtime'],
-            'player_pair': player_pair,  # Add player pair for grouping
+            'player_pair': player_pair,
+            'total_rating': total_rating,
         }
         
-        # Group by player pair first
         player_pair_groups[player_pair].append(game_data)
     
     # Now group by tournament, but keep player pairs together
@@ -178,22 +179,8 @@ def index(request):
     # Convert to desired list-of-dicts format, but now sort player groups by number of games
     grouped_tournaments_list = []
     for tournament_name, tournament_games in sorted(grouped_games.items()):
-        # Group games by player_pair within this tournament
-        player_groups = defaultdict(list)
-        for game in tournament_games:
-            player_groups[game['player_pair']].append(game)
-        
-        # Sort player groups by number of games in descending order
-        sorted_player_groups = sorted(
-            player_groups.items(), 
-            key=lambda x: len(x[1]), 
-            reverse=True
-        )
-        
-        # Flatten the sorted player groups back into a single list of games
-        sorted_games = []
-        for _, games in sorted_player_groups:
-            sorted_games.extend(games)
+        # Sort games by total rating in descending order
+        sorted_games = sorted(tournament_games, key=lambda x: x.get('total_rating', 0), reverse=True)
         
         grouped_tournaments_list.append({
             "name": tournament_name,
@@ -241,6 +228,8 @@ def get_game_pgn(request, game_id):
             'black_title': game.black.title if game.black else None,
             'black_name': game.black.name if game.black else None,
             'black_username': game.black_username,
+            'whiteelo': game.whiteelo,
+            'blackelo': game.blackelo,
             'result': game.result,
             'format': game.format,
             'opening': game.opening,

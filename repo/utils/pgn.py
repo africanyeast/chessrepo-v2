@@ -107,14 +107,14 @@ def is_new_game(pgn_string: str) -> bool:
     cache.set(pgn_hash, True, timeout=60 * 60 * 24 * 32)  # 32 days TTL
     return pgn_hash
 
-def pgn_to_dict(pgn_string: str, source: str, pgn_hash: str) -> dict:
-        """Converts a chess.pgn.Game object to a standardized dictionary."""
-        game = chess.pgn.read_game(io.StringIO(pgn_string))
-        headers = game.headers
-        # Determine game format
-        game_format = determine_game_format(pgn_string)
-        
-        if source=="chesscom":
+def pgn_to_dict(pgn_string: str, source: str, pgn_hash: str, tournament_name: str = None) -> dict:
+    """Converts a chess.pgn.Game object to a standardized dictionary."""
+    game = chess.pgn.read_game(io.StringIO(pgn_string))
+    headers = game.headers
+    # Determine game format
+    game_format = determine_game_format(pgn_string)
+    
+    if source=="chesscom":
             
             white_username = headers.get("White", "")
             black_username = headers.get("Black", "")
@@ -133,8 +133,9 @@ def pgn_to_dict(pgn_string: str, source: str, pgn_hash: str) -> dict:
                 tournament_name = extract_chesscom_tournament_name(headers.get("Tournament"))
             else:
                 # fallback to Event if tournament is not available
-                tournament_name = extract_tournament_name(headers.get("Event", ""))
-            
+                # tournament_name = extract_tournament_name(headers.get("Event", ""))
+                # for now, just go with Online Chess and add variant if present
+                tournament_name = f"Online Chess{' (' + headers.get('Variant') + ')' if headers.get('Variant') else ''}"
             return {
                 "white": white_player,
                 "black": black_player,
@@ -160,87 +161,84 @@ def pgn_to_dict(pgn_string: str, source: str, pgn_hash: str) -> dict:
                 "pgn_hash": pgn_hash,
                 "source": source,
             }
-        elif source=="lichess":
-            
-            def clean_pgn_value(value: str | None, type: str = "date") -> str | None:
-                """Helper to clean PGN date/time values. Returns None if invalid."""
-                if value is None or value == "" or "?" in value:
-                    return None
-                return value
+    elif source=="lichess":
+        
+        def clean_pgn_value(value: str | None, type: str = "date") -> str | None:
+            """Helper to clean PGN date/time values. Returns None if invalid."""
+            if value is None or value == "" or "?" in value:
+                return None
+            return value
 
-            raw_pgn_date = headers.get("Date")
-            raw_pgn_utc_date = headers.get("UTCDate")
-            raw_pgn_utc_time = headers.get("UTCTime")
+        raw_pgn_date = headers.get("Date")
+        raw_pgn_utc_date = headers.get("UTCDate")
+        raw_pgn_utc_time = headers.get("UTCTime")
 
-            cleaned_date = clean_pgn_value(raw_pgn_date, "date")
-            cleaned_utc_date = clean_pgn_value(raw_pgn_utc_date, "date")
-            cleaned_utc_time = clean_pgn_value(raw_pgn_utc_time, "time")
+        cleaned_date = clean_pgn_value(raw_pgn_date, "date")
+        cleaned_utc_date = clean_pgn_value(raw_pgn_utc_date, "date")
+        cleaned_utc_time = clean_pgn_value(raw_pgn_utc_time, "time")
 
-            # Determine final date for the model
-            # Prioritize "Date" header if valid, otherwise fallback to "UTCDate" if valid.
-            final_model_date = cleaned_date if cleaned_date else cleaned_utc_date
+        # Determine final date for the model
+        # Prioritize "Date" header if valid, otherwise fallback to "UTCDate" if valid.
+        final_model_date = cleaned_date if cleaned_date else cleaned_utc_date
 
-            # Determine final enddate for the model
-            # Prioritize "UTCDate" if valid, otherwise fallback to the determined final_model_date.
-            final_model_enddate = cleaned_utc_date if cleaned_utc_date else final_model_date
-            
-            # final_model_endtime is simply the cleaned_utc_time
-            final_model_endtime = cleaned_utc_time
+        # Determine final enddate for the model
+        # Prioritize "UTCDate" if valid, otherwise fallback to the determined final_model_date.
+        final_model_enddate = cleaned_utc_date if cleaned_utc_date else final_model_date
+        
+        # final_model_endtime is simply the cleaned_utc_time
+        final_model_endtime = cleaned_utc_time
 
-            white_fide_id = headers.get("WhiteFideId", "")
-            black_fide_id = headers.get("BlackFideId", "")
-            white_player = get_or_create_lichess_player(white_fide_id)
-            black_player = get_or_create_lichess_player(black_fide_id)
+        white_fide_id = headers.get("WhiteFideId", "")
+        black_fide_id = headers.get("BlackFideId", "")
+        white_player = get_or_create_lichess_player(white_fide_id)
+        black_player = get_or_create_lichess_player(black_fide_id)
 
-            return {
-                "white": white_player,
-                "black": black_player,
-                "white_username": headers.get("White", ""),
-                "black_username": headers.get("Black", ""),
-                "result": headers.get("Result", ""),
-                "opening": headers.get("Opening", ""),
-                "eco": headers.get("ECO", ""),
-                "whiteelo": headers.get("WhiteElo", ""),
-                "blackelo": headers.get("BlackElo", ""),
-                "event": headers.get("Event", ""), # Lichess PGNs use "Event" for the tournament/event name
-                "site": headers.get("Site", ""),
-                "tournament": headers.get("Event", ""), # Using Event as Tournament for Lichess
-                "round": headers.get("Round", ""),
-                "date": final_model_date,
-                "enddate": final_model_enddate,
-                "endtime": final_model_endtime,
-                "variant": headers.get("Variant", ""),
-                "link": headers.get("GameUrl", ""),
-                "format": game_format,
-                "pgn": pgn_string,
-                "pgn_hash": pgn_hash,
-                "source": source,
-            }
+        return {
+            "white": white_player,
+            "black": black_player,
+            "white_username": headers.get("White", ""),
+            "black_username": headers.get("Black", ""),
+            "result": headers.get("Result", ""),
+            "opening": headers.get("Opening", ""),
+            "eco": headers.get("ECO", ""),
+            "whiteelo": headers.get("WhiteElo", ""),
+            "blackelo": headers.get("BlackElo", ""),
+            "event": headers.get("Event", ""), # Lichess PGNs use "Event" for the tournament/event name
+            "site": headers.get("Site", ""),
+            "tournament": tournament_name or headers.get("Event", ""), # Use provided tournament_name if available
+            "round": headers.get("Round", ""),
+            "date": final_model_date,
+            "enddate": final_model_enddate,
+            "endtime": final_model_endtime,
+            "variant": headers.get("Variant", ""),
+            "link": headers.get("GameUrl", ""),
+            "format": game_format,
+            "pgn": pgn_string,
+            "pgn_hash": pgn_hash,
+            "source": source,
+        }
 
 
-def extract_games_from_pgn_string(pgn_string: str, source: str) -> list[dict]:
-        """
-        generic method to Parse a PGN string and extracts all games into the standardized dictionary format.
-        This method is generic and can be used for PGNs from any source.
-        """
-        if not pgn_string:
-            return []
+def extract_games_from_pgn_string(pgn_string: str, source: str, tournament_name: str = None) -> list[dict]:
+    """
+    generic method to Parse a PGN string and extracts all games into the standardized dictionary format.
+    This method is generic and can be used for PGNs from any source.
+    """
+    if not pgn_string:
+        return []
 
-        pgn_io = io.StringIO(pgn_string)
-        extracted_games = []
-        while True:
-            try:
-                # chess.pgn.read_game() can return None at EOF or skip headers/errors
-                game = chess.pgn.read_game(pgn_io)
-                if game is None:
-                    break
-                pgn_string = str(game)
-                pgn_hash = is_new_game(pgn_string)
-                # hopefully this reduces the overhead expecially with the API calls and database creation of new players in pgn_dict
-                if pgn_hash is False:
-                    continue # skip this game if it's already in the database, we don't want to duplicate games
-                extracted_games.append(pgn_to_dict(pgn_string, source, pgn_hash))
-            except Exception as e:
-                #print(f"Error reading a game from PGN: {e}")
-                continue 
-        return extracted_games
+    pgn_io = io.StringIO(pgn_string)
+    extracted_games = []
+    while True:
+        try:
+            game = chess.pgn.read_game(pgn_io)
+            if game is None:
+                break
+            pgn_string = str(game)
+            pgn_hash = is_new_game(pgn_string)
+            if pgn_hash is False:
+                continue
+            extracted_games.append(pgn_to_dict(pgn_string, source, pgn_hash, tournament_name))
+        except Exception as e:
+            continue 
+    return extracted_games

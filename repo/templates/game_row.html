@@ -1,10 +1,10 @@
+{% load chess_tags %}
 <div class="game-row game-row-interactive"
      data-game-id="{{ game.id }}"
-     data-format="{{ game.format|default:'unknown' }}" 
-     data-variant="{{ game.variant|default:'' }}"
      data-player-pair="{{ game.player_pair }}"
      style="cursor: pointer;">
     <div class="d-flex justify-content-between align-items-center">
+        <!-- display time and add timezone-->
         <div class="game-time">{{ game.endtime|time:"H:i"|default:"--" }}</div>
         <div class="flex-grow-1 text-capitalize">
             {% if game.white %}
@@ -21,6 +21,6 @@
                 {{ game.black_username|default:"N/A" }}
             {% endif %}
         </div>
-        <div class="game-result">{{ game.result|default:"N/A" }}</div>
+        <div class="game-result">{{ game.result|format_game_result|default:"N/A" }}</div>
     </div>
 </div>
