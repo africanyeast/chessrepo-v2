@@ -8,13 +8,13 @@ class LICHESS_API:
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
 
-    # def get_broadcast_top(self) -> dict | None:
-    #     url = f"{self.BASE_URL}/broadcast/top"
-    #     response = requests.get(url, headers=self.HEADERS)
-    #     if response.status_code == 200:
-    #         return response.json()
-    #     else:
-    #         return None
+    def get_broadcast_top(self) -> dict | None:
+        url = f"{self.BASE_URL}/broadcast/top"
+        response = requests.get(url, headers=self.HEADERS)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return None
     
     # def get_finished_rounds_from_top_broadcast(self, top_broadcast: dict) -> list:
     #     # store the ids of finished rounds that are tier 1 or higher and active broadcasts from the top broadcast page

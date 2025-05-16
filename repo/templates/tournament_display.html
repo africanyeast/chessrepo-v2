@@ -23,7 +23,7 @@
                                 {% else %}
                                     {{ first_game.white_username|default:"N/A" }}
                                 {% endif %}
-                                <span class="match-score">{{ scores.white }}</span>
+                                <span class="match-score">{{ scores.player1 }}</span>
                                 <span class="player-group-versus">&nbsp;vs&nbsp;</span>
                                 {% if first_game.black %}
                                     {{first_game.black.title|default:""}}
@@ -31,7 +31,7 @@
                                 {% else %}
                                     {{ first_game.black_username|default:"N/A" }}
                                 {% endif %}
-                                <span class="match-score">{{ scores.black }}</span>
+                                <span class="match-score">{{ scores.player2 }}</span>
                             {% endwith %}
                             <!-- <span class="match-score"> Score: {{ group.list|calculate_match_score }}</span> -->
                         </span>
