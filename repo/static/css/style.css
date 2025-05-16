@@ -553,12 +553,21 @@ body {
 
 /*mobile responsiveness*/
 @media (max-width: 767px) {
+    .navbar{
+        padding: 3px 0;
+    }
     .filter-nav .nav-link {
         padding: 5px 10px;
         font-size: 0.85rem;
     }
     .game-row {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+    }
+    .game-row.selected-game .game-result {
+        font-size: 0.8rem;
+    }
+    .game-time{
+        display: none;
     }
     .game-view-header h6{
         font-size: 0.9rem;
