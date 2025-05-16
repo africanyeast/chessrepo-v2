@@ -27,13 +27,13 @@ ENV = config('ENV', default='local')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENV == 'production':
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['chessrepo.onrender.com']
     DEBUG = False
     DATABASES = {
         'default': dj_database_url.config(default=config('DATABASE_URL'), conn_max_age=0, ssl_require=True)
     }
 else:
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['*']
     DEBUG = True
     DATABASES = {
         'default': dj_database_url.config(default=config('DATABASE_URL'), conn_max_age=0, ssl_require=False)
