@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from decouple import config
 import dj_database_url
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +28,7 @@ ENV = config('ENV', default='local')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENV == 'production':
-    ALLOWED_HOSTS = ['chessrepo.onrender.com']
+    ALLOWED_HOSTS = ['chessrepo.onrender.com', 'chessrepo.com']
     DEBUG = False
     DATABASES = {
         'default': dj_database_url.config(default=config('DATABASE_URL'), conn_max_age=0, ssl_require=True)
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -121,10 +123,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-STATIC_ROOT = BASE_DIR / "staticfiles"  # For production
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For production
+# Enable gzip for smaller files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Caching settings
 CACHES = {

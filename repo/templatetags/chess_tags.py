@@ -6,18 +6,7 @@ register = template.Library()
 def calculate_match_score(games):
     white_score = 0
     black_score = 0
-    
-    # Debug: Print the games data to see what we're working with
-    #print(f"Games data: {games}")
-    
     for game in games:
-        # Debug: Print each game to verify structure
-        #print(f"Processing game: {game}")
-        
-        if 'result' not in game:
-            print(f"Warning: Game missing 'result' key: {game}")
-            continue
-            
         if game['result'] == "1-0":
             white_score += 1
         elif game['result'] == "0-1":
@@ -25,16 +14,12 @@ def calculate_match_score(games):
         elif game['result'] == "1/2-1/2":
             white_score += 0.5
             black_score += 0.5
-        else:
-            print(f"Warning: Unexpected result value: {game['result']}")
-    
-    # Debug: Print final scores before formatting
-    print(f"Final scores - White: {white_score}, Black: {black_score}")
     
     # Convert decimal scores to fractions (e.g., 7.5 to 7½)
     white_display = format_score_with_fraction(white_score)
     black_display = format_score_with_fraction(black_score)
     
+    # return f"{white_display}-{black_display}"
     return {
         'white': white_display,
         'black': black_display
