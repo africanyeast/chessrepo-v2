@@ -89,6 +89,39 @@ document.addEventListener('DOMContentLoaded', function () {
     const gameDisplayWrapper = document.getElementById('gameDisplayWrapper');
     //const gameViewSection = document.getElementById('gameViewDisplay');
     const gameLoader = document.getElementById('gameLoader');
+
+    // calendar elements
+    const calendarToggle = document.getElementById('calendarToggle');
+    const calendarDropdown = document.getElementById('calendarDropdown');
+    const datepickerContainer = document.querySelector('.datepicker-container');
+    if (calendarToggle && calendarDropdown && datepickerContainer) {
+        // Initialize datepicker
+        $(datepickerContainer).datepicker({
+            format: 'mm/dd/yy',
+            autoclose: true,
+            todayHighlight: true,
+            orientation: 'bottom'
+        });
+        
+        // Handle date selection
+        $(datepickerContainer).on('changeDate', function(e) {
+            const date = e.format('mm/dd/yy');
+            window.location.href = `?date=${date}`;
+        });
+        
+        // Toggle calendar dropdown
+        calendarToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            calendarDropdown.classList.toggle('show');
+        });
+        
+        // Close calendar when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!calendarToggle.contains(e.target) && !calendarDropdown.contains(e.target)) {
+                calendarDropdown.classList.remove('show');
+            }
+        });
+    }
     
     // Game detail elements
     let gamePlayerNames = document.getElementById('gamePlayerNames');

@@ -176,10 +176,157 @@ body {
     font-size: 0.9rem;
 }
 
+/* Calendar styles */
+.date-selector {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
 
+.calendar-toggle {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.calendar-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    margin-top: 0.5rem;
+    background-color: var(--background-light);
+    border-radius: 0.25rem;
+    /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); */
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+}
+
+.dark-mode .calendar-dropdown {
+    background-color: var(--background-dark);
+}
+
+.calendar-dropdown.show {
+    display: block;
+}
+
+/* Datepicker customization */
+.datepicker-container .datepicker {
+    width: 350px;
+}
+
+.datepicker-container {
+    position: relative;
+    z-index: 1050;
+}
+
+.datepicker table {
+    width: 100%;
+}
+
+/* Override bootstrap datepicker styles */
+.datepicker table tr td.active,
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active.disabled,
+.datepicker table tr td.active.disabled:hover {
+    background-color: var(--active-game) !important;
+    color: var(--active-game-color) !important;
+    background-image: none !important;
+    text-shadow: none !important;
+    font-weight: 600 !important;
+}
+
+/* Style today's date */
+.datepicker table tr td.today,
+.datepicker table tr td.today:hover,
+.datepicker table tr td.today.disabled,
+.datepicker table tr td.today.disabled:hover {
+    background-color: var(--active-game) !important;
+    background-image: none !important;
+    color: var(--active-game-color) !important;
+    text-shadow: none !important;
+    font-weight: 600 !important;
+}
+
+/* Additional datepicker styling */
+.datepicker table tr td,
+.datepicker table tr th {
+    color: var(--text-color);
+}
+
+.datepicker .datepicker-switch:hover,
+.datepicker .prev:hover,
+.datepicker .next:hover,
+.datepicker tfoot tr th:hover {
+    background: var(--nav-link-hover) !important;
+}
+
+/* Dark theme support */
+.dark-mode .datepicker,
+.dark-mode .datepicker-dropdown {
+    background-color: var(--background-dark) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+.dark-mode .datepicker table tr td,
+.dark-mode .datepicker table tr th {
+    color: var(--text-color);
+    background-color: var(--background-dark);
+}
+
+.dark-mode .datepicker table tr td.day:hover,
+.dark-mode .datepicker table tr td.focused {
+    background: var(--nav-link-hover);
+}
+
+.dark-mode .datepicker .datepicker-switch:hover,
+.dark-mode .datepicker .prev:hover,
+.dark-mode .datepicker .next:hover,
+.dark-mode .datepicker tfoot tr th:hover {
+    background: var(--nav-link-hover) !important;
+}
+
+/* Year and month selection improvements for dark mode */
+.dark-mode .datepicker .datepicker-months .month,
+.dark-mode .datepicker .datepicker-years .year,
+.dark-mode .datepicker .datepicker-decades .decade,
+.dark-mode .datepicker .datepicker-centuries .century {
+    color: var(--text-color) !important;
+    background-color: var(--background-dark) !important;
+}
+
+.dark-mode .datepicker .datepicker-months .month:hover,
+.dark-mode .datepicker .datepicker-years .year:hover,
+.dark-mode .datepicker .datepicker-decades .decade:hover,
+.dark-mode .datepicker .datepicker-centuries .century:hover {
+    background-color: var(--nav-link-hover) !important;
+    color: var(--text-color) !important;
+}
+
+.dark-mode .datepicker .datepicker-months .month.active,
+.dark-mode .datepicker .datepicker-years .year.active,
+.dark-mode .datepicker .datepicker-decades .decade.active,
+.dark-mode .datepicker .datepicker-centuries .century.active {
+    background-color: var(--active-game) !important;
+    color: var(--active-game-color) !important;
+    text-shadow: none !important;
+}
+
+.dark-mode .datepicker .datepicker-months .month.disabled,
+.dark-mode .datepicker .datepicker-years .year.disabled,
+.dark-mode .datepicker .datepicker-decades .decade.disabled,
+.dark-mode .datepicker .datepicker-centuries .century.disabled {
+    color: var(--text-muted) !important;
+}
 
 .events-container {
-    max-height: calc(100vh - 150px); /* Adjust 180px based on the actual combined height of your header, filter, and date navigation elements */
+    max-height: calc(100vh - 150px); /* Adjust 150px based on the actual combined height of your header, filter, and date navigation elements */
     overflow-y: auto;
 }
 

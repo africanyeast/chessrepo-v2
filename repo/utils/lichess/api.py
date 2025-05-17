@@ -15,34 +15,6 @@ class LICHESS_API:
             return response.json()
         else:
             return None
-    
-    # def get_finished_rounds_from_top_broadcast(self, top_broadcast: dict) -> list:
-    #     # store the ids of finished rounds that are tier 1 or higher and active broadcasts from the top broadcast page
-    #     finished_round_ids = []
-    #     active_broadcasts = top_broadcast.get('active', [])
-
-    #     if not isinstance(active_broadcasts, list):
-    #         return [] # Return empty list if 'active' is not a list or not found
-
-    #     for broadcast_item in active_broadcasts:
-    #         if not isinstance(broadcast_item, dict):
-    #             continue
-
-    #         tour_info = broadcast_item.get('tour')
-    #         round_to_link_info = broadcast_item.get('roundToLink')
-
-    #         if not isinstance(tour_info, dict) or not isinstance(round_to_link_info, dict):
-    #             continue
-
-    #         tour_tier = tour_info.get('tier')
-    #         is_round_finished = round_to_link_info.get('finished', False)
-    #         round_id = round_to_link_info.get('id')
-    #         #only tier 1 and higher events for now
-    #         if tour_tier >= 1 and is_round_finished and round_id:
-    #             finished_round_ids.append(round_id)
-                
-        
-    #     return finished_round_ids
 
     def get_finished_rounds_from_broadcast(self) -> dict:
         """
@@ -86,6 +58,18 @@ class LICHESS_API:
         if response.status_code == 200:
             return response.text
         else:
+            return None
+
+    def get_tournament_pgn(self, tournament_id: str) -> str | None:
+        """
+        Fetches the PGN for an entire tournament/broadcast by its ID.
+        """
+        url = f"{self.BASE_URL}/broadcast/{tournament_id}.pgn"
+        response = requests.get(url, headers=self.HEADERS)
+        if response.status_code == 200:
+            return response.text
+        else:
+            print(f"Error fetching PGN for tournament {tournament_id}: {response.status_code} - {response.text}")
             return None
 
     def get_player_fide_profile(self, fide_id: str) -> dict | None:
