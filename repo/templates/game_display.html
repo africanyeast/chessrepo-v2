@@ -23,17 +23,23 @@
                     <div id="gameSite">&nbsp;</div>
                 </div>
             </div>
-            <!-- <div class="game-action-buttons">
+            <div class="game-action-buttons mt-2">
+                <!-- The old toggleMovesLink is removed from here -->
+                <!-- Existing commented out buttons:
+                <button class="action-button" id="copyPgnButton" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy PGN to clipboard">
+                    Copy PGN
+                </button>
                 <button class="action-button" id="shareGameButton" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy game link">
                     Share
                 </button>
                 <a href="#" class="action-button" id="analyzeGameButton" target="_blank" rel="noopener noreferrer">
                     Analyze
                 </a>
-            </div> -->
+                -->
+            </div>
         </div>
         <div class="chess-board-container">
-            <div class="board-container col-md-12">
+            <div class="board-container col-md-12" id="boardContainer">
                 <div class="game-position" id="gamePgnPosition" data-pgn="">
                     <p class="text-center p-3 text-muted">Click a game on the left to view.</p>
                 </div>

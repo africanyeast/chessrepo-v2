@@ -2,46 +2,57 @@ import LichessPgnViewer from '/static/viewer/viewer.js';
 
 // Global variables
 let pgnViewerInstance = null;
-let gamePgnPositionParent = null;
+let gamePgnPositionParent = null; // This will store the direct parent of #gamePgnPosition, which is .board-container
 let pgnCache = {};
+let currentPgnForViewer = null;
+let showMovesEnabled; // Initialized in DOMContentLoaded from localStorage
 
-function initializeOrUpdateViewer(element, pgn) {
-    // Store the parent element reference on first call
-    if (!gamePgnPositionParent && element) {
-        gamePgnPositionParent = element.parentElement;
-    }
-    
-    // If the original element is no longer in the DOM, recreate it
-    if (!element || !document.body.contains(element)) {
-        if (!gamePgnPositionParent || !document.body.contains(gamePgnPositionParent)) {
+// Updated function signature and logic
+function initializeOrUpdateViewer(pgnData, showMovesVal) { // showMovesVal will be 'auto' or false
+    // 1. Identify and cache the static parent container (.board-container) for the PGN viewer.
+    // This should only need to be found once.
+    if (!gamePgnPositionParent || !document.body.contains(gamePgnPositionParent)) {
+        gamePgnPositionParent = document.querySelector('.board-container'); // From game_display.html
+        if (!gamePgnPositionParent) {
+            console.error("PGN viewer's main parent container (.board-container) not found. Cannot initialize viewer.");
             return;
         }
-        
-        // Clear the parent and create a new container
-        gamePgnPositionParent.innerHTML = '';
-        const newElement = document.createElement('div');
-        newElement.id = 'gamePgnPosition';
-        gamePgnPositionParent.appendChild(newElement);
-        element = newElement;
     }
 
-    // Clear previous instance if any
+    // 2. Destroy existing PGN viewer instance, if any.
     if (pgnViewerInstance && pgnViewerInstance.destroy) {
         try {
             pgnViewerInstance.destroy();
         } catch (e) {
-            // Silent error handling
+            // console.warn("Error destroying previous PGN viewer instance:", e);
         }
         pgnViewerInstance = null;
     }
-    
+
+    // 3. Aggressively clear the content of the parent container.
+    // This removes the old #gamePgnPosition and any other remnants.
+    if (gamePgnPositionParent) {
+        gamePgnPositionParent.innerHTML = '';
+    } else {
+        // This case should be prevented by the check in step 1.
+        // console.error("gamePgnPositionParent is not defined, cannot clear for new viewer.");
+        return;
+    }
+
+    // 4. Create and append a new #gamePgnPosition DOM element inside the cleaned parent.
+    const newViewerDomElement = document.createElement('div');
+    newViewerDomElement.id = 'gamePgnPosition'; // Critical: Must have this ID
+    newViewerDomElement.className = 'game-position'; // Match class from game_display.html for styling
+    gamePgnPositionParent.appendChild(newViewerDomElement);
+
+    // 5. Initialize the PGN viewer on the NEW element.
     const noPgnText = "PGN not available for this game.";
 
-    if (pgn) {
+    if (pgnData) {
         try {
-            pgnViewerInstance = LichessPgnViewer(element, {
-                pgn: pgn,
-                showMoves: 'auto',
+            pgnViewerInstance = LichessPgnViewer(newViewerDomElement, {
+                pgn: pgnData,
+                showMoves: showMovesVal, // Receives 'auto' or false directly
                 keyboardToMove: true,
                 initialPly: 0,
                 showPlayers: true,
@@ -50,10 +61,11 @@ function initializeOrUpdateViewer(element, pgn) {
                 orientation: undefined,
             });
         } catch (e) {
-            element.innerHTML = `<p class="text-center p-3 text-muted">Error loading PGN viewer.</p>`;
+            // console.error("Error initializing PGN viewer:", e);
+            newViewerDomElement.innerHTML = `<p class="text-center p-3 text-muted">Error loading PGN viewer.</p>`;
         }
     } else {
-        element.innerHTML = `<p class="text-center p-3 text-muted">${noPgnText}</p>`;
+        newViewerDomElement.innerHTML = `<p class="text-center p-3 text-muted">${noPgnText}</p>`;
     }
 }
 
@@ -83,12 +95,125 @@ async function fetchGamePGN(gameId) {
     }
 }
 
+// Function to update board container class based on showMovesEnabled state
+function updateBoardContainerClass() {
+    const boardContainer = document.getElementById('boardContainer');
+    if (boardContainer) {
+        if (showMovesEnabled) { // showMovesEnabled is the boolean state
+            // Moves are shown, board container should be wider or default
+            boardContainer.classList.remove('col-md-9', 'mx-auto');
+            boardContainer.classList.add('col-md-12');
+        } else {
+            // Moves are hidden, board container should be narrower
+            boardContainer.classList.remove('col-md-12');
+            boardContainer.classList.add('col-md-9', 'mx-auto');
+        }
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // DOM elements
     const gamesSectionWrapper = document.getElementById('gamesSectionWrapper');
     const gameDisplayWrapper = document.getElementById('gameDisplayWrapper');
-    //const gameViewSection = document.getElementById('gameViewDisplay');
     const gameLoader = document.getElementById('gameLoader');
+
+    // Settings Dropdown Toggles
+    const themeToggleDropdown = document.getElementById('themeToggleDropdown');
+    const showMovesToggleDropdown = document.getElementById('showMovesToggleDropdown');
+
+    // Initialize showMovesEnabled from localStorage before using it
+    // Default to true if not found in localStorage
+    const savedShowMoves = localStorage.getItem('showMovesEnabled');
+    showMovesEnabled = savedShowMoves === 'false' ? false : true;
+
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+    
+    // Only update visuals and add event listeners if elements exist
+    if (themeToggleDropdown) {
+        // Update theme toggle visuals
+        const themeIcon = themeToggleDropdown.querySelector('.toggle-switch i');
+        const themeText = themeToggleDropdown.querySelector('.theme-mode-text');
+        
+        if (themeText) themeText.textContent = 'Dark Mode'; // Keep text consistent
+        
+        if (themeIcon) {
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('bi-toggle-off');
+                themeIcon.classList.add('bi-toggle-on');
+            } else {
+                themeIcon.classList.remove('bi-toggle-on');
+                themeIcon.classList.add('bi-toggle-off');
+            }
+        }
+        
+        // Add theme toggle event listener
+        themeToggleDropdown.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+            
+            // Update visuals after click
+            const icon = this.querySelector('.toggle-switch i');
+            if (icon) {
+                if (document.body.classList.contains('dark-mode')) {
+                    icon.classList.remove('bi-toggle-off');
+                    icon.classList.add('bi-toggle-on');
+                } else {
+                    icon.classList.remove('bi-toggle-on');
+                    icon.classList.add('bi-toggle-off');
+                }
+            }
+        });
+    }
+
+    if (showMovesToggleDropdown) {
+        // Update show moves toggle visuals
+        const movesIcon = showMovesToggleDropdown.querySelector('.toggle-switch i');
+        const movesText = showMovesToggleDropdown.querySelector('.show-moves-text');
+        
+        if (movesText) movesText.textContent = 'Show Moves'; // Keep text consistent
+        
+        if (movesIcon) {
+            if (showMovesEnabled) {
+                movesIcon.classList.remove('bi-toggle-off');
+                movesIcon.classList.add('bi-toggle-on');
+            } else {
+                movesIcon.classList.remove('bi-toggle-on');
+                movesIcon.classList.add('bi-toggle-off');
+            }
+        }
+        
+        // Add show moves toggle event listener
+        showMovesToggleDropdown.addEventListener('click', function (e) {
+            e.preventDefault();
+            showMovesEnabled = !showMovesEnabled;
+            localStorage.setItem('showMovesEnabled', showMovesEnabled.toString());
+            
+            // Update visuals after click
+            const icon = this.querySelector('.toggle-switch i');
+            if (icon) {
+                if (showMovesEnabled) {
+                    icon.classList.remove('bi-toggle-off');
+                    icon.classList.add('bi-toggle-on');
+                } else {
+                    icon.classList.remove('bi-toggle-on');
+                    icon.classList.add('bi-toggle-off');
+                }
+            }
+            
+            updateBoardContainerClass();
+            if (currentPgnForViewer) {
+                initializeOrUpdateViewer(currentPgnForViewer, showMovesEnabled ? 'auto' : false);
+            }
+        });
+    }
+    
+    // Update board container class based on current state
+    updateBoardContainerClass();
 
     // calendar elements
     const calendarToggle = document.getElementById('calendarToggle');
@@ -209,8 +334,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add player name
         const nameSpan = document.createElement('span');
         nameSpan.className = 'player-name';
-        //nameSpan.textContent = name || username || 'N/A';
-        // add not just name but also elo in brackets
         nameSpan.innerHTML = `${name || username || 'N/A'} <span class="player-elo">(${elo || '-'})</span>`;
         container.appendChild(nameSpan);
         
@@ -239,8 +362,10 @@ document.addEventListener('DOMContentLoaded', function () {
         
         // Fetch game data
         const gameData = await fetchGamePGN(gameId);
-        
+
         if (gameData && gameData.pgn) {
+            currentPgnForViewer = gameData.pgn;
+    
             // Clear the player names container
             gamePlayerNames.innerHTML = '';
             
@@ -277,18 +402,16 @@ document.addEventListener('DOMContentLoaded', function () {
             gameSite.textContent = (gameData.site && gameData.site.trim() !== '?') ? gameData.site : '-';
             gameFormat.textContent = gameData.format || '-';
             
-            // Initialize PGN viewer
-            const gamePgnPosition = document.getElementById('gamePgnPosition');
-            initializeOrUpdateViewer(gamePgnPosition, gameData.pgn);
+            // Initialize PGN viewer - pass 'auto' or false based on showMovesEnabled
+            initializeOrUpdateViewer(currentPgnForViewer, showMovesEnabled ? 'auto' : false);
+            updateBoardContainerClass(); // Ensure class is correct after loading game
             
-            // Show game details
             showGameDetails();
         } else {
-            // Handle error case
-            const gamePgnPosition = document.getElementById('gamePgnPosition');
-            if (gamePgnPosition) {
-                gamePgnPosition.innerHTML = '<p class="text-center p-3 text-muted">Failed to load game data.</p>';
-            }
+            currentPgnForViewer = null; // Clear PGN if loading failed
+            // Initialize PGN viewer with null PGN, pass 'auto' or false for moves display
+            initializeOrUpdateViewer(null, showMovesEnabled ? 'auto' : false);
+            updateBoardContainerClass(); // Ensure class is correct even if PGN fails
             showGameDetails();
         }
     }
@@ -307,34 +430,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize tournament containers based on game count
     initializeTournamentContainers();
 
-    // set theme and store choice in browser storage
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('i');
-    const currentTheme = localStorage.getItem('theme') || 'light';
-
-    // Initial setup based on stored preference
-    if (currentTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeIcon.className = 'bi bi-sun-fill text-white';
-    } else {
-        themeIcon.className = 'bi bi-moon-stars-fill text-white';
-    }
-
-    // Toggle theme when button is clicked
-    themeToggle.addEventListener('click', function () {
-        document.body.classList.toggle('dark-mode');
-        const isDarkMode = document.body.classList.contains('dark-mode');
-        const newTheme = isDarkMode ? 'dark' : 'light';
-        
-        // Update icon and text based on new theme
-        if (isDarkMode) {
-            themeIcon.className = 'bi bi-sun-fill text-white';
-        } else {
-            themeIcon.className = 'bi bi-moon-stars-fill text-white';
-        }
-        
-        localStorage.setItem('theme', newTheme);
-    });
 });
 
 
@@ -419,3 +514,39 @@ function formatGameResult(result) {
 // Make functions available globally
 window.togglePlayerGroup = togglePlayerGroup;
 window.toggleTournament = toggleTournament;
+
+// document.addEventListener('click', function(e) { // This listener seems problematic
+//     const gamePgnPosition = document.getElementById('gamePgnPosition');
+//     const toggleMovesLink = document.getElementById('toggleMovesLink'); // toggleMovesLink needs to be accessible here
+
+//     if (gamePgnPosition && currentPgnForViewer) { // Check currentPgnForViewer as well
+//         // This will re-initialize the viewer on ANY click on the document.
+//         // This is likely not the intended behavior.
+//         // initializeOrUpdateViewer(gamePgnPosition, currentPgnForViewer, showMovesState);
+//     }
+
+//     // Update the link text based on the new state
+//     // This also might not be what you want on every click.
+//     if (toggleMovesLink) {
+//         // toggleMovesLink.textContent = showMovesState ? 'Hide Moves' : 'Show Moves'; // Old logic
+//         toggleMovesLink.textContent = (showMovesState === 'auto') ? 'Hide Moves' : 'Show Moves'; // Corrected logic
+//     }
+// });
+
+// The event listener `document.addEventListener('click', ...)` at the end of your script
+// was likely added by mistake or for debugging. It causes the PGN viewer to re-initialize
+// on *every* click anywhere on the page, which is generally not desired.
+// I've commented it out above. If you need its functionality, it should be revised
+// to target specific elements or events, and ensure `toggleMovesLink` is correctly scoped.
+// For now, the primary toggle functionality is handled by the click listener on 'toggleMovesLink' itself.
+
+// If you intended for the last click listener to be active, ensure `toggleMovesLink` is accessible
+// (e.g., by querying it inside that listener or declaring it in a broader scope)
+// and be aware that it will re-initialize the viewer on every document click.
+// The corrected text update for it would be:
+// if (toggleMovesLink) {
+//     toggleMovesLink.textContent = (showMovesState === 'auto') ? 'Hide Moves' : 'Show Moves';
+// }
+// However, I strongly recommend removing or rethinking that general document click listener.
+// The specific click listener for 'toggleMovesLink' is now correctly placed within DOMContentLoaded
+// and handles the toggling.

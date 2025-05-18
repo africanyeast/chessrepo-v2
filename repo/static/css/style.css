@@ -110,6 +110,76 @@ body {
     font-size: 0.8rem;
 }
 
+/* Settings Dropdown Styles */
+.navbar .dropdown-toggle::after {
+    display: none;
+}
+
+.navbar .dropdown-menu {
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+    padding: 0.5rem 0;
+}
+
+.dark-mode .navbar .dropdown-menu {
+    background-color: var(--background-dark);
+    border-color: var(--border-color);
+}
+
+.navbar .dropdown-item {
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+    background-color: var(--background-hover);
+    color: var(--text-color);
+}
+
+.dark-mode .navbar .dropdown-item:hover,
+.dark-mode .navbar .dropdown-item:focus {
+    background-color: var(--nav-link-hover);
+}
+
+
+.navbar .dropdown-item .toggle-switch i {
+    font-size: 1.6em;
+    vertical-align: middle;
+}
+
+.navbar .dropdown-item .toggle-switch i.bi-toggle-on {
+    color: #28a745;
+}
+
+.navbar .dropdown-item .toggle-switch i.bi-toggle-off {
+    color: #6c757d;
+}
+
+.navbar .dropdown-item {
+    color: var(--text-color);
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+}
+
+.dark-mode .navbar .dropdown-item {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.navbar .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.navbar .dropdown-item i.bi {
+    vertical-align: top;
+}
+
+
 .theme-button {
     color: white;
     border: none;
@@ -217,7 +287,7 @@ body {
 
 /* Datepicker customization */
 .datepicker-container .datepicker {
-    width: 350px;
+    width: 300px;
 }
 
 .datepicker-container {
