@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from .models import Game  # Assuming models.py is in the same app 'repo'
-from datetime import date as py_date, timedelta
+from datetime import date as py_date, timedelta, datetime
 from collections import defaultdict
 from django.http import JsonResponse
+from django.http import HttpResponse
 from django.views.decorators.http import require_GET
 
 def get_title_weight(title):
@@ -241,4 +242,40 @@ def get_game_pgn(request, game_id):
             'success': False,
             'error': 'Game not found'
         }, status=404)
+
+
+def download_pgn(request):
+    """
+    View to download all games for a specific date as a PGN file.
+    Only fetches the PGN field which already contains complete game information.
+    """
+    # Get the date from the request query parameters
+    date_str = request.GET.get('date')
+    
+    try:
+        # Parse the date string into a datetime object
+        if date_str:
+            date_obj = datetime.strptime(date_str, '%Y-%m-%d').date()
+        else:
+            # If no date provided, use today's date
+            date_obj = datetime.now().date()
+            
+        # Format the date for display in the filename
+        formatted_date = date_obj.strftime('%Y-%m-%d')
+        
+        # Query only the PGN field for all games on the specified date
+        games = Game.objects.filter(date=date_obj).values_list('pgn', flat=True)
+        
+        # Combine all PGNs into a single string
+        pgn_content = "\n\n".join(pgn for pgn in games if pgn)
+        
+        # Create the response with the PGN content
+        response = HttpResponse(pgn_content, content_type='application/x-chess-pgn')
+        response['Content-Disposition'] = f'attachment; filename="chess_games_{formatted_date}.pgn"'
+        
+        return response
+        
+    except Exception as e:
+        # Handle any errors
+        return HttpResponse(f"Error generating PGN file: {str(e)}", status=500)
 

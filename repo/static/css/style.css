@@ -38,6 +38,15 @@
     --skeleton-highlight: #e0e0e0;
     --skeleton-board: #f5f5f5;
     --skeleton-pulse: rgba(255, 255, 255, 0.2);
+    --download-banner-bg: #f1f8ff;
+    --download-banner-border: #cce5ff;
+    --download-banner-hover: #e6f3ff;
+    --download-icon-color: #007bff;
+    --download-text-color: #0056b3;
+    --download-description-color: #495057;
+    --download-button-bg: #007bff;
+    --download-button-hover: #0069d9;
+    --download-button-text: white;
 }
 
 /* Dark mode colors */
@@ -64,6 +73,15 @@
     --skeleton-highlight: #2d333b;
     --skeleton-board: #2d333b;
     --skeleton-pulse: rgba(255, 255, 255, 0.1);
+    --download-banner-bg: #1e2a38;
+    --download-banner-border: #30363d;
+    --download-banner-hover: #2d333b;
+    --download-icon-color: #58a6ff;
+    --download-text-color: #f8f9fa;
+    --download-description-color: #8b949e;
+    --download-button-bg: #58a6ff;
+    --download-button-hover: #388bfd;
+    --download-button-text: #0d1117;
 }
 
 body {
@@ -395,6 +413,62 @@ body {
     color: var(--text-muted) !important;
 }
 
+/* Download PGN Feature styles with dark mode support */
+.download-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--download-banner-bg);
+    border: 1px solid var(--download-banner-border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 10px 0 15px 0;
+}
+
+.download-banner:hover {
+    background-color: var(--download-banner-hover);
+    cursor: pointer;
+}
+
+.download-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.download-icon {
+    color: var(--download-icon-color);
+    font-size: 1.5rem;
+}
+
+.download-text {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--download-text-color);
+}
+
+.download-description {
+    color: var(--download-description-color);
+    font-size: 0.85rem;
+}
+
+.download-action {
+    background-color: var(--download-button-bg);
+    color: var(--download-button-text);
+    border: none;
+    border-radius: 4px;
+    padding: 7px 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.download-action:hover {
+    background-color: var(--download-button-hover);
+    text-decoration: none;
+}
+
+
 .events-container {
     max-height: calc(100vh - 150px); /* Adjust 150px based on the actual combined height of your header, filter, and date navigation elements */
     overflow-y: auto;
@@ -430,8 +504,9 @@ body {
     /* padding: 0 5px; */
     font-size: 0.8rem;
 }
-/* Player Group Styles */
 
+
+/* Player Group Styles */
 .tournament-container {
     width: 100%;
 }
@@ -799,5 +874,16 @@ body {
     }
     .footer-links{
         font-size: 0.85rem;
+    }
+    .download-banner {
+        padding: 6px 8px;
+    }
+    .download-icon {
+        font-size: 1.2rem;
+    }
+    .download-action {
+        padding: 6px 8px;
+        font-size: 0.8rem;
+        display: flex;
     }
 }
